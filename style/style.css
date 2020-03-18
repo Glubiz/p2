@@ -1,0 +1,270 @@
+body{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-image: url(../images/header.jpg);
+}
+
+h3{
+    font-weight: lighter;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    grid-gap: 1em;
+    grid-auto-rows: minmax(10px,auto);
+    grid-auto-columns: minmax(10px,auto);
+    grid-template-areas: 
+    "h h h h h h h h h h h h"
+    "h h h h h h h h h h h h"
+    "h h h h h h h h h h h h"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m";
+}
+
+.header{
+    grid-area: h;
+    background-color: blue;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "l t t c c"
+    "l t t c c";
+}
+
+.test{
+    grid-area: t;
+    text-align: center;
+}
+
+.logo{
+    grid-area: l;
+    font-size: 3em;
+    background-color: green;
+}
+
+.cart{
+    grid-area: c;
+    font-size: 2em;
+    background-color: cyan;
+    justify-self: end;
+    align-self: center;
+}
+
+.main{
+    grid-area: m;
+    background-color: crimson;
+    display: grid;
+    grid-template-columns: 1fr 15fr 1fr;
+    grid-template-rows: 1fr 3fr 1fr;
+    grid-gap: 1em;
+    grid-template-areas: 
+    ". b ."
+    ". n ."
+    ". m .";
+}
+
+.box1{
+    grid-area: b;
+    background-color: grey;
+    text-align: center;
+}
+
+.box2{
+    grid-area: n;
+    background-color: indianred;
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas: 
+    "q w e"
+    "r t y"
+    "u i o"
+    "p a s"
+    "d . f";
+    text-align: center;
+}
+
+.t1{
+    grid-row: 1/3;
+    grid-column: 1/3;
+    border: black 1px solid;
+  }
+
+.t2{
+    grid-row: 1/3;
+    grid-column: 3/4;
+    border: black 1px solid;
+}
+
+.k1{
+    grid-row: 1/2;
+    grid-column: 1/2; 
+}
+
+.k1 > a > button, .k2 > a > button, .k3 > a > button, .k4 > a > button{
+    width: 100%;
+    height: 100%;
+}
+
+.k2{
+    grid-row: 1/2;
+    grid-column: 2/3;
+}
+
+.k3{
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+
+.k4{
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+
+  table{
+    border-bottom: #ccc 1px solid;
+  }
+  
+  tr:nth-child(even){
+    background-color: #ccc;
+  }
+  
+  .right table th, .right table td {
+    text-align: start;
+  }
+.one{
+    grid-area: q;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.two{
+    grid-area: w;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.three{
+    grid-area: e;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.four{
+    grid-area: r;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.five{
+    grid-area: t;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.six{
+    grid-area: y;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.seven{
+    grid-area: u;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.eight{
+    grid-area: i;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.nine{
+    grid-area: o;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.ten{
+    grid-area: p;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.eleven{
+    grid-area: a;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.twelve{
+    grid-area: s;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.start{
+    grid-area: d;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+.end{
+    grid-area: f;
+    background-color: lightgreen;
+    border: 1px #ccc solid;
+}
+
+
+.box3{
+    grid-area: m;
+    background-color: lightblue;
+}
+
+.box3 > a > button{
+    width: 100%;
+    height: 100%;
+    border-radius: 0%;
+}
+
+#bones{
+    position: fixed;
+    bottom: 1px;
+    left: 1px;
+    width: 100%;
+    height: 100px;
+    background-color: brown;
+    font-size: 5em;
+}
+
+
+@media only screen and (max-width: 600px){
+    .header{
+        grid-template-areas: 
+        "l l t c c"
+        "l l t c c";
+    }
+    
+    .main{
+        grid-template-areas: 
+        "b b b"
+        "n n n"
+        "m m m";
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .main{
+        background-color: lime;
+    }
+}

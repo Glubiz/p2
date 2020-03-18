@@ -1,0 +1,152 @@
+body{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-image: url(../images/header.jpg);
+}
+
+h3{
+    font-weight: lighter;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    grid-gap: 1em;
+    grid-auto-rows: minmax(10px,auto);
+    grid-auto-columns: minmax(10px,auto);
+    grid-template-areas: 
+    "h h h h h h h h h h h h"
+    "h h h h h h h h h h h h"
+    "h h h h h h h h h h h h"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m"
+    "m m m m m m m m m m m m";
+}
+
+.header{
+    grid-area: h;
+    background-color: blue;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "l t t c c"
+    "l t t c c";
+}
+
+.test{
+    grid-area: t;
+    text-align: center;
+}
+
+.logo{
+    grid-area: l;
+    font-size: 3em;
+    background-color: green;
+}
+
+.cart{
+    grid-area: c;
+    font-size: 2em;
+    background-color: cyan;
+    justify-self: end;
+    align-self: center;
+}
+
+.main{
+    grid-area: m;
+    background-color: crimson;
+    display: grid;
+    grid-template-columns: 1fr 15fr 1fr;
+    grid-template-rows: 1fr 3fr 1fr;
+    grid-gap: 1em;
+    grid-template-areas: 
+    ". b ."
+    ". n ."
+    ". m .";
+}
+
+.box1{
+    grid-area: b;
+    background-color: grey;
+    text-align: center;
+}
+
+.box2{
+    grid-area: n;
+    background-color: indianred;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas: 
+    "k1 k2 e"
+    "k1 k2 e"
+    "k3 k4 e"
+    "k3 k4 e";
+    text-align: center;
+    grid-gap: 2em;
+}
+
+.k1{
+    grid-area: k1;
+}
+
+.k1 > a > button, .k2 > a > button, .k3 > a > button, .k4 > a > button{
+    width: 100%;
+    height: 100%;
+}
+
+.k2{
+    grid-area: k2;
+}
+
+.k3{
+    grid-area: k3;
+}
+
+.k4{
+    grid-area: k4;
+}
+
+.eventkalender{
+    grid-area: e;
+    border: 1px black solid;
+}
+
+#bones{
+    position: fixed;
+    bottom: 1px;
+    left: 1px;
+    width: 100%;
+    height: 100px;
+    background-color: brown;
+    font-size: 5em;
+}
+
+
+@media only screen and (max-width: 600px){
+    .header{
+        grid-template-areas: 
+        "l l t c c"
+        "l l t c c";
+    }
+    
+    .main{
+        grid-template-areas: 
+        "b b b"
+        "n n n"
+        "m m m";
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .main{
+        background-color: lime;
+    }
+}
