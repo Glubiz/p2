@@ -37,12 +37,12 @@ ob_start();
             exit();
           }
           else {
-            header("Location: ../index.php?error=wrongpassword");
+            header("Location: ../profil.php?error=wrongpassword");
             exit();
           }
         }
         else {
-          header("Location: ../index.php?error=nouser");
+          header("Location: ../profil.php?error=nouser");
           exit();
         }
       }
@@ -51,7 +51,7 @@ ob_start();
     mysqli_close($conn);
   }
   else {
-    header("Location: ../index.php");
+    header("Location: ../profil.php");
     exit();
   }
 

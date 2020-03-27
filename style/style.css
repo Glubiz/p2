@@ -1,6 +1,11 @@
+/* 255, 153, 0 */
+
 body{
     font-family: Georgia, 'Times New Roman', Times, serif;
     background-image: url(../images/header.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0px -220px;
 }
 
 h3{
@@ -27,41 +32,53 @@ h3{
     "m m m m m m m m m m m m"
     "m m m m m m m m m m m m"
     "m m m m m m m m m m m m";
+    height: 90vh;
+    width: 100vw;
 }
 
 .header{
     grid-area: h;
-    background-color: blue;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr 1fr;
     grid-template-areas: 
-    "l t t c c"
-    "l t t c c";
+    "l t t t c"
+    "l t t t c";
+    text-align: end;
 }
 
 .test{
     grid-area: t;
+    font-size: 2em;
+    color: #fff;
     text-align: center;
+    align-self: center;
 }
 
 .logo{
     grid-area: l;
-    font-size: 3em;
-    background-color: green;
+    align-self: center;
+}
+
+.logo > a > img {
+    width: 80%;
 }
 
 .cart{
     grid-area: c;
     font-size: 2em;
-    background-color: cyan;
-    justify-self: end;
+    text-align: center;
     align-self: center;
+    padding-right: 10%;
 }
+
+.cart > a > img {
+    width: 20%;
+}
+
 
 .main{
     grid-area: m;
-    background-color: crimson;
     display: grid;
     grid-template-columns: 1fr 15fr 1fr;
     grid-template-rows: 1fr 3fr 1fr;
@@ -74,13 +91,25 @@ h3{
 
 .box1{
     grid-area: b;
-    background-color: grey;
     text-align: center;
+    background-color: #ddd;
+    opacity: 80%;
+}
+
+.box1 h3{
+    font-size: 2em;
+}
+
+.box1 p {
+    color: red;
+    font-size: 1em;
 }
 
 .box2{
+
+    background-color: lightgreen;
+    opacity: 80%;
     grid-area: n;
-    background-color: indianred;
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
     grid-template-rows: repeat(5, 1fr);
@@ -91,6 +120,26 @@ h3{
     "p a s"
     "d . f";
     text-align: center;
+}
+
+.form{
+    grid-row: 1/6;
+    grid-column: 1/4;
+    align-self: start;
+    padding-top: 10px;
+}
+
+input[type=text], input[type=password]{
+    width: 20%;
+    font-size: 1em;
+    margin: auto;
+    display: block;
+    
+}
+
+.form button{
+    width: 6%;
+    height: 2%;
 }
 
 .t1{
@@ -228,24 +277,17 @@ h3{
 
 .box3{
     grid-area: m;
-    background-color: lightblue;
 }
 
-.box3 > a > button{
+.box3 > button{
     width: 100%;
     height: 100%;
     border-radius: 0%;
+    font-size: 2em;
+    background-color: #ddd;
+    opacity: 80%;
 }
 
-#bones{
-    position: fixed;
-    bottom: 1px;
-    left: 1px;
-    width: 100%;
-    height: 100px;
-    background-color: brown;
-    font-size: 5em;
-}
 
 
 @media only screen and (max-width: 600px){

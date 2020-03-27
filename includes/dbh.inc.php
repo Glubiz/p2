@@ -1,4 +1,3 @@
-  <!-- Create connection -->
 <?php
   $dbServername = "mysql35.unoeuro.com";
   $dbUsername = "solskov_jensen_dk";

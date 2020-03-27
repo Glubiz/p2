@@ -1,6 +1,9 @@
 body{
     font-family: Georgia, 'Times New Roman', Times, serif;
-    background-image: url(../images/header.jpg);
+    background-image: url("../images/IMG_6546.JPG");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0px
 }
 
 h3{
@@ -27,44 +30,59 @@ h3{
     "m m m m m m m m m m m m"
     "m m m m m m m m m m m m"
     "m m m m m m m m m m m m";
+    height: 100vh;
+    width: 100vw;
 }
 
 .header{
     grid-area: h;
-    background-color: blue;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr 1fr;
     grid-template-areas: 
-    "l t t c c"
-    "l t t c c";
+    "l l t t c"
+    "l l t t c";
+    text-align: end;
 }
 
 .test{
     grid-area: t;
+    font-size: 2em;
+    color: rgb(255, 153, 0);
+    opacity: 95%;
     text-align: center;
+    align-self: center;
 }
 
 .logo{
     grid-area: l;
-    font-size: 3em;
-    background-color: green;
+    align-self: center;
+    text-align: center;
+}
+
+.logo > a > img {
+    width: 65%;
+    padding: 10%;
 }
 
 .cart{
     grid-area: c;
     font-size: 2em;
-    background-color: cyan;
-    justify-self: end;
+    text-align: center;
     align-self: center;
+    padding-right: 10%;
+}
+
+.cart > a > img {
+    width: 20%;
+    opacity: 90%;
 }
 
 .main{
     grid-area: m;
-    background-color: crimson;
     display: grid;
     grid-template-columns: 1fr 15fr 1fr;
-    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 4fr 1fr;
     grid-gap: 1em;
     grid-template-areas: 
     ". b ."
@@ -72,23 +90,15 @@ h3{
     ". m .";
 }
 
-.box1{
-    grid-area: b;
-    background-color: grey;
-    text-align: center;
-}
 
 .box2{
     grid-area: n;
-    background-color: indianred;
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 3fr;
+    grid-template-rows: repeat(2, 1fr);
     grid-template-areas: 
-    "k1 k2 e"
-    "k1 k2 e"
-    "k3 k4 e"
-    "k3 k4 e";
+    "k1 k2 k3 e"
+    "m m m e";
     text-align: center;
     grid-gap: 2em;
 }
@@ -98,9 +108,23 @@ h3{
 }
 
 .k1 > a > button, .k2 > a > button, .k3 > a > button, .k4 > a > button{
+    width: 90%;
+    height: 90%;
+    background-color: rgb(255, 153, 0);
+    border: 1px rgb(255, 153, 0) solid;
+    opacity: 60%;
+    font-size: 2em;
+}
+
+.k1 > a > button:hover, .k2 > a > button:hover, .k3 > a > button:hover, .k4 > a > button:hover{
     width: 100%;
     height: 100%;
+    background-color: rgb(196, 117, 0);
+    border: 1px rgb(196, 117, 0) solid;
+    opacity: 80%;
+    font-size: 2em;
 }
+
 
 .k2{
     grid-area: k2;
@@ -110,27 +134,31 @@ h3{
     grid-area: k3;
 }
 
-.k4{
-    grid-area: k4;
-}
-
 .eventkalender{
     grid-area: e;
-    border: 1px black solid;
+    background-color: rgb(255, 153, 0);
+    opacity: 60%;
 }
 
-#bones{
-    position: fixed;
-    bottom: 1px;
-    left: 1px;
+.box3{
+    grid-area: m;
     width: 100%;
-    height: 100px;
-    background-color: brown;
-    font-size: 5em;
+    height: 100%;
+    text-align: center;
 }
 
+.box3 > a > button {
+    width: 100%;
+    height: 50%;
+    background-color: rgb(255, 153, 0);
+    border: 1px rgb(255, 153, 0) solid;
+    opacity: 60%;
+    font-size: 2em;
+    text-decoration: none;
+}
 
-@media only screen and (max-width: 600px){
+/* Media queries*/
+@media only screen and (max-width: 1281px){
     .header{
         grid-template-areas: 
         "l l t c c"
@@ -142,6 +170,42 @@ h3{
         "b b b"
         "n n n"
         "m m m";
+    }
+
+    .cart{
+        text-align: end;
+        align-self: center;
+    }
+    .cart > a > img {
+        width: 13%;
+        opacity: 90%;
+    }
+
+    .logo{
+        text-align: start;
+        align-self: center;
+    }
+
+    .logo > a > img {
+        width: 60%;
+    }
+
+    .k1 > a > button, .k2 > a > button, .k3 > a > button, .k4 > a > button{
+        width: 100%;
+        height: 100%;
+        background-color: rgb(255, 153, 0);
+        border: 1px rgb(255, 153, 0) solid;
+        opacity: 60%;
+        font-size: 2em;
+    }
+    
+    .k1 > a > button:hover, .k2 > a > button:hover, .k3 > a > button:hover, .k4 > a > button:hover{
+        width: 120%;
+        height: 120%;
+        background-color: rgb(196, 117, 0);
+        border: 1px rgb(196, 117, 0) solid;
+        opacity: 60%;
+        font-size: 2em;
     }
 }
 
