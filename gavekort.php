@@ -52,7 +52,7 @@
                     <button id="plus" onclick="plusstu()">+</button>
                 </div>
                 <div class="start">I alt</div>
-                <div class="end"><p id="total">0 DKK</p></div>
+                <div class="end"><p id="total" style="display:inline;">0 </p><p style="display:inline;">DKK</p></div>
             </div>
             <!-- add to card div-->
             <div class="box3"><button href="">Føj til kurv</button></div>
@@ -66,16 +66,24 @@
         var b = 0
         var v = 0
         var s = 0
-        var y = 0
+        var y = sessionStorage.getItem("y");
+        if (y = 0) {
+            var y = 0
+        } else {
+            var y = sessionStorage.getItem("y");
+            document.getElementById("total").innerHTML = y;
+        }
 
         function plusbarn() {
             document.getElementById("barn").innerHTML = b += 1;
             document.getElementById("total").innerHTML = y += 275;
+            sessionStorage.setItem("y", y);
         }
         function minusbarn() {
             if (b>0) {
                 document.getElementById("barn").innerHTML = b -= 1;
                 document.getElementById("total").innerHTML = y -= 275;
+                sessionStorage.setItem("y", y);
             } else{
                 document.getElementById("barn").innerHTML = b = 0;
             }
@@ -84,11 +92,13 @@
         function plusvoksen() {
             document.getElementById("voksen").innerHTML = v += 1;
             document.getElementById("total").innerHTML = y += 435;
+            sessionStorage.setItem("y", y);
         }
         function minusvoksen() {
             if (v>0) {
                 document.getElementById("voksen").innerHTML = v -= 1;
                 document.getElementById("total").innerHTML = y -= 435;
+                sessionStorage.setItem("y", y);
             } else{
                 document.getElementById("voksen").innerHTML = v = 0;
             }
@@ -97,11 +107,13 @@
         function plusstu() {
             document.getElementById("studerende").innerHTML = s += 1;
             document.getElementById("total").innerHTML = y += 350;
+            sessionStorage.setItem("y", y);
         }
         function minusstu() {
             if (s>0) {
                 document.getElementById("studerende").innerHTML = s -= 1;
                 document.getElementById("total").innerHTML = y -= 350;
+                sessionStorage.setItem("y", y);
             } else{
                 document.getElementById("studerende").innerHTML = s = 0;
             }
