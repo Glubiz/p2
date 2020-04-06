@@ -5,7 +5,8 @@ body{
     background-image: url("../images/IMG_6546.JPG");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 0px
+    background-position: 0px;
+    overflow-x: hidden;
 }
 
 h3{
@@ -92,12 +93,12 @@ h3{
 .box1{
     grid-area: b;
     text-align: center;
-    background-color: rgb(255, 153, 0);
-    opacity: 60%;
+    background-color: rgb(255, 153, 0, 0.8);
 }
 
-.box1 h3{
-    font-size: 2em;
+.box1 h1{
+    font-size: 3em;
+    color: #eee;
 }
 
 .box1 p {
@@ -106,8 +107,7 @@ h3{
 }
 
 .box2{
-    background-color: rgb(255, 153, 0);
-    opacity: 60%;
+    background-color: rgb(255, 153, 0, 0.8);
     grid-area: n;
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
@@ -126,6 +126,11 @@ h3{
     grid-column: 1/4;
     align-self: start;
     padding-top: 10px;
+}
+
+.form > a{
+    color: #eee;
+    text-decoration: none;
 }
 
 input[type=text], input[type=password]{
@@ -191,37 +196,124 @@ input[type=text], input[type=password]{
     text-align: start;
   }
 
+.fail{
+    grid-row: 1/6;
+    grid-column: 1/4;
+    text-align: center;
+}
+
+#fail{
+    color: #eee;
+}
+
+.sinfo{
+    color: red;
+    font-size: 0.5em;
+}
+
 .fable{
     grid-row: 1/6;
     grid-column: 1/4;
-    border: 1px solid black;
+    border: 1px solid #eee;
     display: table;
     width: 100%;
     height: 100%;
     font-size: 1.5em;
     font-weight: lighter;
+    table-layout: fixed;
 }
 
 .fr {
-    border: 1px solid black;
+    border: 1px solid #eee;
     display: table-row; 
 }
 .fd {
-    border: 1px solid black;
+    border: 1px solid #eee;
     display: table-cell; 
+    background-color:rgba(238, 238, 238, 0.8);
+}
+
+.fd > button{
+    width: 5%;
+    height: 40%;
+    border-radius: 0%;
+}
+
+.fd > select{
+    width: 30%;
+    height: 40%;
+    border-radius: 0%;
+}
+
+#button{
+    width: 20%;
+    height: 40%;
+    border-radius: 0%;
+}
+
+#fo{
+    font-size: 1.5em;
+    font-weight: bold;
+    color:#eee;
+    background-color: rgba(255, 153, 0, 0.8);
 }
 
 .box3{
     grid-area: m;
+    text-align: center;
 }
 
 .box3 > button{
+    width: 50%;
+    height: 50%;
+    border-radius: 0%;
+    font-size: 3em;
+    background-color: rgba(158, 84, 0, 0.8);
+    color: #eee;
+}
+
+#mover {
+    position: absolute;
+    right: -100%;
+    top: 0%;
     width: 100%;
     height: 100%;
-    border-radius: 0%;
-    font-size: 2em;
-    background-color: rgb(255, 153, 0);
-    opacity: 60%;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+  }
+ 
+.go-left {
+    -webkit-transform: translate(100%,0);
+    -moz-transform: translate(100%,0);
+    -o-transform: translate(100%,0);
+    transform: translate(100%,0)
+}
+ 
+.go-right {
+    -webkit-transform: translate(-100%,0);
+    -moz-transform: translate(-100%,0);
+    -o-transform: translate(-100%,0);
+    transform: translate(-100%,0)
+}
+
+#fill {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    width:40%;
+    height: 100%;
+    background-color: rgba(133, 133, 133, 0.5);
+}
+
+#kurv{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    width:60%;
+    height: 100%;
+    background-color:rgba(238, 238, 238, 0.9);
 }
 
 

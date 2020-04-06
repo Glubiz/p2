@@ -35,13 +35,13 @@
                     if (isset($_SESSION['user_id'])) {
                       if ($_SESSION['user_email'] == 'test@test.com') {
                        echo '<div class="box1">            
-                       <h4>Du er logget ind som admin</h4>
+                       <h1>Du er logget ind som admin</h1>
                        </div><div class="box2"></div>
                        '; 
                       } else {
                         echo '<!-- overskrift-->
                         <div class="box1">            
-                          <h3>Dine køb</h3>
+                          <h1>Dine køb</h1>
                           </div>
                           <div class="box2">';
 
@@ -96,7 +96,7 @@
                       echo '
                 <!-- overskrift-->
                 <div class="box1">            
-                    <h3>Login</h3>';
+                    <h1>Login</h1>';
                     if (isset($_GET['error'])){
                       if ($_GET['error'] == "emptyfields") {
                         echo "<p>Udfyld felter</p>";

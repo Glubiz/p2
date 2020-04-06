@@ -26,23 +26,25 @@
         <div class="main">
             <!-- overskrift-->
             <div class="box1">
-                <h3>Din kurv</h3>
+                <h1>Din kurv</h1>
             </div>
             <!-- valg div-->
             <div class="box2">
 
+            <div class="fail"><h1 id="fail"></h1></div>
+
             <div class="fable" id="fable">
 
                     <div class="fr" id="first">
-                        <div class="fd">Billettype</div>
-                        <div class="fd">Stk. Pris</div>
-                        <div class="fd">Antal</div>
+                        <div class="fd"id="fo">Billettype</div>
+                        <div class="fd" id="fo">Stk. Pris</div>
+                        <div class="fd" id="fo">Antal</div>
                     </div>
 
                     <!-- div til total pris -->
                     <div class="fr" id="last">
                         <div class="fd">I alt</div>
-                        <div class="fd"></div>
+                        <div class="fd"><button onClick="reset()">Nulstil kurven</button></div>
                         <div class="fd"><p id="total"></p></div>
                     </div>    
                 </div>
@@ -50,11 +52,21 @@
 
             </div>
             <!-- add to card div-->
-            <div class="box3"><button>Til Betaling</button></div>
+            <div class="box3" id="hidden"><button>Til Betaling</button></div>
         </div>
     </div>
 
     <script>
+
+    if (localStorage.getItem("ba") === null && localStorage.getItem("bp") === null && localStorage.getItem("bad") === null && localStorage.getItem("bpd") === null && localStorage.getItem("va") === null && localStorage.getItem("vp") === null && localStorage.getItem("vad") === null && localStorage.getItem("vpd") === null && localStorage.getItem("sa") === null && localStorage.getItem("sp") === null && localStorage.getItem("sad") === null && localStorage.getItem("spd") === null && localStorage.getItem("bag") === null && localStorage.getItem("bpg") === null && localStorage.getItem("vag") === null && localStorage.getItem("vpg") === null && localStorage.getItem("vag") === null && localStorage.getItem("vpg") === null && localStorage.getItem("sag") === null && localStorage.getItem("spg") === null && localStorage.getItem("ga") === null && localStorage.getItem("gap") === null) {
+        document.getElementById("fail").innerHTML = "Kurven er tom";
+        document.getElementById("fable").style.visibility = "hidden";
+        document.getElementById("hidden").style.visibility = "hidden";
+        
+    } else {
+        /*$(".fable .fr:last").before('<div class="fr" id="first"><div class="fd"id="fo">Billettype</div><div class="fd" id="fo">Stk. Pris</div><div class="fd" id="fo">Antal</div></div>');
+        $(".fable .fr:last").before('<div class="fr" id="last"><div class="fd">I alt</div><div class="fd"><button onClick="reset()">Nulstil kurven</button></div><div class="fd"><p id="total"></p></div></div>'); */
+
         // Børne årskort
         if (localStorage.getItem("ba") === null || localStorage.getItem("bp") === null) {
             var ba = 0;
@@ -115,6 +127,46 @@
             $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Studernede Billetter</p></div><div class="fd"><p>148 DKK</p></div><div class="fd"><p>' + sad + '</p></div></div>');
         }
 
+        // Børne årskort
+        if (localStorage.getItem("bag") === null || localStorage.getItem("bpg") === null) {
+            var bag = 0;
+        } else {
+            var bag = localStorage.getItem("bag");
+            var bpg = localStorage.getItem("bpg");
+            //Jquery
+            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Børne Årskort Gavekort</p></div><div class="fd"><p>275 DKK</p></div><div class="fd"><p>' + bag + '</p></div></div>');
+        }
+
+        // Voksen årskort
+        if (localStorage.getItem("vag") === null || localStorage.getItem("vpg") === null) {
+            var vag = 0;
+        } else {
+            var vag = localStorage.getItem("vag");
+            var vpg = localStorage.getItem("vpg");
+            //Jquery
+            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Voksen Årskort Gavekort</p></div><div class="fd"><p>435 DKK</p></div><div class="fd"><p>' + vag + '</p></div></div>');
+        }
+
+        // Studerende årskort
+        if (localStorage.getItem("sag") === null || localStorage.getItem("spg") === null) {
+            var sag = 0;
+        } else {
+            var sag = localStorage.getItem("sag");
+            var spg = localStorage.getItem("spg");
+            //Jquery
+            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Studernede Årskort Gavekort</p></div><div class="fd"><p>350 DKK</p></div><div class="fd"><p>' + sag + '</p></div></div>');
+        }
+
+        // Studerende årskort
+        if (localStorage.getItem("ga") === null || localStorage.getItem("gap") === null) {
+            var ga = 0;
+        } else {
+            var ga = localStorage.getItem("ga");
+            var gap = localStorage.getItem("gap");
+            //Jquery
+            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Gavekort</p></div><div class="fd"><p>' + gap + ' DKK</p></div><div class="fd"><p>' + ga + '</p></div></div>');
+        }
+
         // Total pris
         if (localStorage.getItem("y") === null || localStorage.getItem("y") === null) {
             var y = 0;
@@ -122,6 +174,12 @@
             var y = parseFloat(localStorage.getItem("y"));
             document.getElementById("total").innerHTML = "Total pris: " + y;
         }
+
+        // Nulstil kurven
+        function reset() {
+            localStorage.clear();
+        }
+    }
     </script>
 </body>
 </html>

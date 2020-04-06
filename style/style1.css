@@ -3,7 +3,7 @@ body{
     background-image: url("../images/IMG_6546.JPG");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 0px
+    background-position: 0px;
 }
 
 h3{
@@ -110,18 +110,18 @@ h3{
 .k1 > a > button, .k2 > a > button, .k3 > a > button, .k4 > a > button{
     width: 90%;
     height: 90%;
-    background-color: rgb(255, 153, 0);
-    border: 1px rgb(255, 153, 0) solid;
-    opacity: 60%;
+    background-color: rgba(255, 153, 0, 0.8);
+    border: 1px rgba(255, 153, 0, 0.8) solid;
     font-size: 2em;
+    color: #eee;
+
 }
 
 .k1 > a > button:hover, .k2 > a > button:hover, .k3 > a > button:hover, .k4 > a > button:hover{
     width: 100%;
     height: 100%;
-    background-color: rgb(196, 117, 0);
-    border: 1px rgb(196, 117, 0) solid;
-    opacity: 80%;
+    background-color: rgba(196, 117, 0, 0.9);
+    border: 1px rgb(196, 117, 0, 0.9) solid;
     font-size: 2em;
 }
 
@@ -136,8 +136,21 @@ h3{
 
 .eventkalender{
     grid-area: e;
-    background-color: rgb(255, 153, 0);
-    opacity: 60%;
+    background-color: rgba(255, 153, 0, 0.8);
+    color: #eee;
+}
+
+.eo{
+    width: 100%;
+    height: 5%;
+    color: #eee;
+}
+
+.eb{
+    width: 100%;
+    height: 90%;
+    background-color: rgb(238, 238, 238, 0.8);
+    color: rgb(255, 153, 0);
 }
 
 .box3{
@@ -150,11 +163,97 @@ h3{
 .box3 > a > button {
     width: 100%;
     height: 50%;
-    background-color: rgb(255, 153, 0);
-    border: 1px rgb(255, 153, 0) solid;
-    opacity: 60%;
+    background-color: rgba(255, 153, 0, 0.8);
+    border: 1px rgb(255, 153, 0, 0.8) solid;
+    color: #eee;
     font-size: 2em;
     text-decoration: none;
+}
+
+.box3 > button{
+    grid-row: 6/10;
+    grid-column: 1/7;
+    border-radius: 0%;
+    font-size: 3em;
+    background-color: rgba(158, 84, 0, 0.8);
+    color: #eee;
+}
+
+
+#fill {
+    position: absolute;
+    grid-row: 1/4;
+    grid-column: 1/4;
+    width:100%;
+    height: 100%;
+    background-color: rgba(133, 133, 133, 0.5);
+}
+
+
+#mover {
+    position: absolute;
+    right: -100%;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+  }
+ 
+.go-left {
+    -webkit-transform: translate(100%,0);
+    -moz-transform: translate(100%,0);
+    -o-transform: translate(100%,0);
+    transform: translate(100%,0)
+}
+ 
+.go-right {
+    -webkit-transform: translate(-100%,0);
+    -moz-transform: translate(-100%,0);
+    -o-transform: translate(-100%,0);
+    transform: translate(-100%,0)
+}
+
+#fill {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    width:40%;
+    height: 100%;
+    background-color: rgba(133, 133, 133, 0.5);
+}
+
+#kurv{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    width:60%;
+    height: 100%;
+    background-color:rgba(238, 238, 238, 0.9);
+}
+
+
+.fable{
+    grid-row: 1/6;
+    grid-column: 1/7;
+    border: 1px solid #eee;
+    display: table;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em;
+    font-weight: lighter;
+}
+
+.fr {
+    border: 1px solid #eee;
+    display: table-row; 
+}
+.fd {
+    border: 1px solid #eee;
+    display: table-cell; 
+    background-color:rgba(238, 238, 238, 0.8);
 }
 
 /* Media queries*/
