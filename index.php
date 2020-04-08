@@ -86,7 +86,7 @@ session_start();
 
             </div>
             <!-- add to card div-->
-            <div class="box3" id="hidden"><button>Til Betaling</button></div>
+            <div class="box3" id="hidden"><a href="payment.php"><button>Til Betaling</button></a></div>
         </div>
         </div>
         </div>

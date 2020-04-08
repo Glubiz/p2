@@ -115,13 +115,13 @@
                     <div class="fr" id="last">
                         <div class="fd">I alt</div>
                         <div class="fd"><button onClick="reset()">Nulstil kurven</button></div>
-                        <div class="fd"><p id="total"></p></div>
+                        <div class="fd"><p id="totalp"></p></div>
                     </div>    
                 </div>
 
             </div>
             <!-- add to card div-->
-            <div class="box3" id="hidden"><button>Til Betaling</button></div>
+            <div class="box3" id="hidden"><a href="payment.php"><button>Til Betaling</button></a></div>
         </div>
         </div>
         </div>
@@ -338,6 +338,7 @@
             alert("Kurven er opdateret");
             localStorage.setItem("y", y);
             localStorage.setItem('saved', new Date().getTime());
+            location.reload();
         }
       var mover = document.getElementById('mover');
       var trigger = document.querySelector('#trigger');
@@ -465,7 +466,7 @@
             var y = 0;
         } else {
             var y = parseFloat(localStorage.getItem("y"));
-            document.getElementById("total").innerHTML = "Total pris: " + y;
+            document.getElementById("totalp").innerHTML = "Total pris: " + y;
         }
 
         // Nulstil kurven

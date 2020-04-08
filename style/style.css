@@ -272,6 +272,15 @@ input[type=text], input[type=password]{
     color: #eee;
 }
 
+.box3 > a > button{
+    width: 50%;
+    height: 50%;
+    border-radius: 0%;
+    font-size: 3em;
+    background-color: rgba(158, 84, 0, 0.8);
+    color: #eee;
+}
+
 #mover {
     position: absolute;
     right: -100%;

@@ -11,6 +11,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="style/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
 $(document).ready(function(){
   /*$('.header, .box2').css('display', 'none');
