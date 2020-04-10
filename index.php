@@ -155,6 +155,11 @@ session_cache_limiter(FALSE);
                         </tr>
                         <?php
                         $total = $total + ($value["item_quantity"] * $value["product_price"]);
+                        if ($total < 0) {
+                            $total = 0;
+                        } else {
+                            $total + ($value["item_quantity"] * $value["product_price"]);
+                        }
                     }
                         ?>
                         <tr>

@@ -153,7 +153,7 @@
                                             <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
                                         </td>
                                         <td>
-                                            <input type="text" name="quantity" value="1">
+                                            <input type="number" name="quantity" value="1" min="0">
                                         </td>
                                         <td>
                                         <input type="submit" name="add" style="margin-top: 5px;"
