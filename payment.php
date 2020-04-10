@@ -22,57 +22,6 @@ $(document).ready(function(){
   $('.k4').delay(3600).fadeIn(1000);*/
 });
 </script>
-
-<style>
-
-input[type=text] {
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
-label {
-  margin-bottom: 10px;
-  display: block;
-}
-
-.icon-container {
-  margin-bottom: 20px;
-  padding: 7px 0;
-  font-size: 24px;
-}
-
-.btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
-  width: 100%;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 17px;
-}
-
-.btn:hover {
-  background-color: #45a049;
-}
-
-a {
-  color: #2196F3;
-}
-
-hr {
-  border: 1px solid lightgrey;
-}
-
-span.price {
-  float: right;
-  color: grey;
-}
-</style>
   </head>
   <body>
 
@@ -103,66 +52,83 @@ span.price {
             <div class="box1"><h1>Betaling</h1></div>
             <!-- valg div-->
             <div class="box2">
-
-            <div class="row">
-            <div class="col-75">
-                <div class="container">
-                    <form action="/action_page.php">
-      
-                    <div class="row">
-                        <div class="col-50">
-                            <label for="fname"><i class="fa fa-user"></i> Navn</label>
+            <div class="payment">
+                    <form action="" method="POST">
+                            <label for="fname"> Navn</label>
                             <input type="text" id="fname" name="firstname" placeholder="Indtast Navn">
-                            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                            <label for="email"> Email</label>
                             <input type="text" id="email" name="email" placeholder="Indtast email">
-                    </div>
-                </div>
 
-                <div class="col-50">
-                    <h3>Betaling</h3>
+                    <h3>Kortdetaljer</h3>
                     <label for="cname">Kortholders Navn</label>
                     <input type="text" id="cname" name="cardname" placeholder="Indtast Kortholders Navn">
                     <label for="ccnum">Kort Nummer</label>
                     <input type="text" id="ccnum" name="cardnumber" placeholder="XXXX-XXXX-XXXX-XXXX">
-                <div class="row">
-                <div class="col-50">
+
                     <label for="expmonth">Udløbsdato</label>
+                    <br>
                     <input type="month" id="expmonth" name="expmonth">
-                </div>
-                <div class="col-50">
+                    <br>
+
                     <label for="cvv">CVV</label>
                     <input type="text" id="cvv" name="cvv" placeholder="XXX">
-                </div>
-            </div>
-        </div>
-          
-        </div>
-        <input type="submit" value="Continue to checkout" class="btn">
+              </div>
+                    
+          <div class="pay">
+        <input type="submit" value="Betal" class="btn">
       </form>
-    </div>
-  </div>
-</div>
+      </div>
 
-            <!-- <form action="/charge" method="post" id="payment-form">
-            <div class="form-row">
-            <label for="card-element">
-            Credit or debit card
-            </label>
-            <div id="card-element"> -->
-            <!-- A Stripe Element will be inserted here.
-            <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="16" placeholder="xxxx xxxx xxxx xxxx">
-            </div> -->
 
-            <!-- Used to display Element errors. 
-            <div id="card-errors" role="alert"></div>
-            </div>
 
-            <button>Submit Payment</button>
-            </form>
+      <div class="t2">
+                         <!-- Kurv -->
+                <h1>Din kurv</h1>
+            <!-- valg div-->
+            <div class="table-responsive">
+            <table class="table table-bordered">
+            <tr>
+                <th width="30%">Product Name</th>
+                <th width="10%">Quantity</th>
+                <th width="13%">Price Details</th>
+                <th width="10%">Total Price</th>
+                <th width="17%">Remove Item</th>
+            </tr>
+ 
+            <?php
+                if(!empty($_SESSION["cart"])){
+                    $total = 0;
+                    foreach ($_SESSION["cart"] as $key => $value) {
+                        ?>
+                        <tr>
+                            <td><?php echo $value["item_name"]; ?></td>
+                            <td><?php echo $value["item_quantity"]; ?></td>
+                            <td><?php echo $value["product_price"]; ?> DKK</td>
+                            <td>
+                                 <?php echo number_format($value["item_quantity"] * $value["product_price"], 2); ?> DKK</td>
+                            <td><a href="dagsbillet.php?action=delete&id=<?php echo $value["product_id"]; ?>"><span
+                                        class="text-danger">Remove Item</span></a></td>
+ 
+                        </tr>
+                        <?php
+                        $total = $total + ($value["item_quantity"] * $value["product_price"]);
+                    }
+                        ?>
+                        <tr>
+                            <td colspan="3" align="right">Total</td>
+                            <th align="right"><?php echo number_format($total, 2); ?> DKK</th>
+                            <td></td>
+                        </tr>
+                        <?php
+                    } else {
+                        echo "<div class='fail'><h1 id='fail'>Kurven er tom</h1></div>";
+                    }
+                ?>
+            </table>
             </div>
         </div>
         </div>
-    </div>-->
+
 
 
 <script>

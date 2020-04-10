@@ -1,6 +1,70 @@
+
 <?php
 session_cache_limiter(FALSE);
-session_start();
+    session_start();
+    $dbServername = "mysql35.unoeuro.com";
+    $dbUsername = "solskov_jensen_dk";
+    $dbPassword = "JKQ1TGTK";
+    $dbName = "solskov_jensen_dk_db";
+        
+    // Create connection
+    $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+
+ 
+    if (isset($_POST["add"])){
+        if (isset($_SESSION["cart"])){
+            $item_array_id = array_column($_SESSION["cart"],"product_id");
+            if (!in_array($_GET["id"],$item_array_id)){
+                $count = count($_SESSION["cart"]);
+                $item_array = array(
+                    'product_id' => $_GET["id"],
+                    'item_name' => $_POST["hidden_name"],
+                    'product_price' => $_POST["hidden_price"],
+                    'item_quantity' => $_POST["quantity"],
+                );
+                $_SESSION["cart"][$count] = $item_array;
+                echo '<script>window.location="dagsbillet.php"</script>';
+            }else{
+                foreach ($_SESSION["cart"] as $keys => $value){
+                    if ($value["product_id"] == $_GET["id"]){
+                        unset($_SESSION["cart"][$keys]);
+                        $item_array_id = array_column($_SESSION["cart"],"product_id");
+                        if (!in_array($_GET["id"],$item_array_id)){
+                            $count = count($_SESSION["cart"]);
+                            $item_array = array(
+                                'product_id' => $_GET["id"],
+                                'item_name' => $_POST["hidden_name"],
+                                'product_price' => $_POST["hidden_price"],
+                                'item_quantity' => $_POST["quantity"],
+                            );
+                            $_SESSION["cart"][$count] = $item_array;
+                    }
+                }
+                echo '<script>window.location="dagsbillet.php"</script>';
+            }}
+            
+        }else{
+            $item_array = array(
+                'product_id' => $_GET["id"],
+                'item_name' => $_POST["hidden_name"],
+                'product_price' => $_POST["hidden_price"],
+                'item_quantity' => $_POST["quantity"],
+            );
+            $_SESSION["cart"][0] = $item_array;
+        }
+    }
+ 
+    if (isset($_GET["action"])){
+        if ($_GET["action"] == "delete"){
+            foreach ($_SESSION["cart"] as $keys => $value){
+                if ($value["product_id"] == $_GET["id"]){
+                    unset($_SESSION["cart"][$keys]);
+                    echo '<script>window.location="dagsbillet.php"</script>';
+                }
+            }
+        }
+    }
+?>
 ?>
 
 <!DOCTYPE html>
@@ -65,32 +129,52 @@ session_start();
             </div>
             <!-- valg div-->
             <div class="box2">
-
-            <div class="fail"><h1 id="fail"></h1></div>
-
-            <div class="fable" id="fable">
-
-                    <div class="fr" id="first">
-                        <div class="fd"id="fo">Billettype</div>
-                        <div class="fd" id="fo">Stk. Pris</div>
-                        <div class="fd" id="fo">Antal</div>
-                    </div>
-
-                    <!-- div til total pris -->
-                    <div class="fr" id="last">
-                        <div class="fd">I alt</div>
-                        <div class="fd"><button onClick="reset()">Nulstil kurven</button></div>
-                        <div class="fd"><p id="total"></p></div>
-                    </div>    
-                </div>
-
+            <div class="table-responsive">
+            <table class="table table-bordered">
+            <tr>
+                <th width="30%">Product Name</th>
+                <th width="10%">Quantity</th>
+                <th width="13%">Price Details</th>
+                <th width="10%">Total Price</th>
+                <th width="17%">Remove Item</th>
+            </tr>
+ 
+            <?php
+                if(!empty($_SESSION["cart"])){
+                    $total = 0;
+                    foreach ($_SESSION["cart"] as $key => $value) {
+                        ?>
+                        <tr>
+                            <td><?php echo $value["item_name"]; ?></td>
+                            <td><?php echo $value["item_quantity"]; ?></td>
+                            <td><?php echo $value["product_price"]; ?> DKK</td>
+                            <td>
+                                 <?php echo number_format($value["item_quantity"] * $value["product_price"], 2); ?> DKK</td>
+                            <td><a href="dagsbillet.php?action=delete&id=<?php echo $value["product_id"]; ?>"><span>Fjern Produkt</span></a></td>
+ 
+                        </tr>
+                        <?php
+                        $total = $total + ($value["item_quantity"] * $value["product_price"]);
+                    }
+                        ?>
+                        <tr>
+                            <td colspan="3" align="right">Total</td>
+                            <th align="right"><?php echo number_format($total, 2); ?> DKK</th>
+                            <td></td>
+                        </tr>
+                        <?php
+                    } else {
+                        echo "<div class='fail'><h1 id='fail'>Kurven er tom</h1></div>";
+                    }
+                ?>
+            </table>
+        </div>
             </div>
             <!-- add to card div-->
             <div class="box3" id="hidden"><a href="payment.php"><button>Til Betaling</button></a></div>
         </div>
         </div>
         </div>
-
     <script>
       var mover = document.getElementById('mover');
       var trigger = document.querySelector('#trigger');
