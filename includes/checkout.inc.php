@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['betaling'])) {
-    $dbServername = "mysql35.unoeuro.com";
+    $dbServername = "localhost";
     $dbUsername = "solskov_jensen_dk";
     $dbPassword = "JKQ1TGTK";
     $dbName = "solskov_jensen_dk_db";

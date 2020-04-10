@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $dbServername = "mysql35.unoeuro.com";
+    $dbServername = "localhost";
     $dbUsername = "solskov_jensen_dk";
     $dbPassword = "JKQ1TGTK";
     $dbName = "solskov_jensen_dk_db";
@@ -98,7 +98,7 @@
             <?php
             $type = 'Gavekort';
 
-            $dbServername = "mysql35.unoeuro.com";
+            $dbServername = "localhost";
             $dbUsername = "solskov_jensen_dk";
             $dbPassword = "JKQ1TGTK";
             $dbName = "solskov_jensen_dk_db";
