@@ -107,7 +107,7 @@ $(document).ready(function(){
                             <td>
                                  <?php echo number_format($value["item_quantity"] * $value["product_price"], 2); ?> DKK</td>
                             <td><a href="dagsbillet.php?action=delete&id=<?php echo $value["product_id"]; ?>"><span
-                                        class="text-danger">Remove Item</span></a></td>
+                                        class="text-danger">Fjern produkt</span></a></td>
  
                         </tr>
                         <?php

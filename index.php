@@ -1,7 +1,7 @@
-
 <?php
 session_cache_limiter(FALSE);
-    session_start();
+session_start();
+header('Cache-control: private');
     $dbServername = "mysql35.unoeuro.com";
     $dbUsername = "solskov_jensen_dk";
     $dbPassword = "JKQ1TGTK";
@@ -64,7 +64,6 @@ session_cache_limiter(FALSE);
             }
         }
     }
-?>
 ?>
 
 <!DOCTYPE html>
@@ -176,7 +175,7 @@ session_cache_limiter(FALSE);
         </div>
             </div>
             <!-- add to card div-->
-            <div class="box3" id="hidden"><a href="payment.php"><button>Til Betaling</button></a></div>
+            <div class="box3" id="hidden"><a href="checkout.php"><button>Til Betaling</button></a></div>
         </div>
         </div>
         </div>

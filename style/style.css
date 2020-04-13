@@ -124,6 +124,10 @@ h3{
     text-align: center;
 }
 
+.InputElement{
+    background-color: rgb(238, 238, 238);
+}
+
 .producttable{
     width: 100%;
     text-align: center;

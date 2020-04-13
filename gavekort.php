@@ -1,5 +1,7 @@
 <?php
-    session_start();
+session_cache_limiter(FALSE);
+session_start();
+header('Cache-control: private');
     $dbServername = "mysql35.unoeuro.com";
     $dbUsername = "solskov_jensen_dk";
     $dbPassword = "JKQ1TGTK";
@@ -140,7 +142,7 @@
  
                     ?>
                     <div class="container">
-                        <form method="post" action="gavekort.php?action=add&id=<?php echo $row["product_id"]; ?>">
+                        <form method="POST" action="gavekort.php?action=add&id=<?php echo $row["product_id"]; ?>">
  
                                 <tbody>
                                     <tr>
@@ -153,7 +155,7 @@
                                             <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
                                         </td>
                                         <td>
-                                            <input type="number" name="quantity" value="1" min="0">
+                                            <input type="number" name="quantity" value="0" min="0">
                                         </td>
                                         <td>
                                         <input type="submit" name="add" style="margin-top: 5px;"
@@ -223,7 +225,7 @@
         </div>
             </div>
             <!-- add to card div-->
-            <div class="box3" id="hidden"><a href="payment.php"><button>Til Betaling</button></a></div>
+            <div class="box3" id="hidden"><a href="checkout.php"><button>Til Betaling</button></a></div>
         </div>
         </div>
         </div>

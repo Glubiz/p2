@@ -1,5 +1,7 @@
 <?php
-    session_start();
+session_cache_limiter(FALSE);
+session_start();
+header('Cache-control: private');
     $dbServername = "mysql35.unoeuro.com";
     $dbUsername = "solskov_jensen_dk";
     $dbPassword = "JKQ1TGTK";
@@ -154,7 +156,7 @@
                                             <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
                                         </td>
                                         <td>
-                                            <input type="number" name="quantity" value="1" min="0">
+                                            <input type="number" name="quantity" value="0" min="0">
                                         </td>
                                         <td>
                                         <input type="submit" name="add" style="margin-top: 5px;"
@@ -174,8 +176,7 @@
 
     <!-- Kurv -->
     <div id="mover">
-    <div id="fill">
-    </div>
+    <div id="fill"></div>
     <div id="kurv">
     <div class="box1">
                 <h1>Din kurv</h1>
@@ -204,8 +205,7 @@
                             <td>
                                  <?php echo number_format($value["item_quantity"] * $value["product_price"], 2); ?> DKK</td>
                             <td><a href="dagsbillet.php?action=delete&id=<?php echo $value["product_id"]; ?>"><span
-                                        class="text-danger">Remove Item</span></a></td>
- 
+                                        class="text-danger">Fjern Produkt</span></a></td>
                         </tr>
                         <?php
                         $total = $total + ($value["item_quantity"] * $value["product_price"]);
@@ -222,10 +222,9 @@
                     }
                 ?>
             </table>
-        </div>
-            </div>
             <!-- add to card div-->
-            <div class="box3" id="hidden"><a href="payment.php"><button>Til Betaling</button></a></div>
+            <div class="box3" id="hidden"><a href="checkout.php"><button>Til Betaling</button></a></div>
+        </div>
         </div>
         </div>
         </div>
