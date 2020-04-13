@@ -1,4 +1,7 @@
 <?php
+session_cache_limiter(FALSE);
+session_start();
+header('Cache-control: private');
     include "header.php"
 ?>
     <!-- grid div-->

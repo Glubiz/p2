@@ -44,23 +44,25 @@ session_start();
             <!-- valg div-->
             <div class="box2">
             <div class="payment">
-  <form id="payment-form" method="POST">
+  <form id="payment-form" action="checkout.inc.php" method="POST">
     <label for="fname"> Fornavn</label>
     <input type="text" id="fname" name="firstname" placeholder="Indtast Navn">
 
     <label for="email">Efternavn</label>
-    <input type="text" id="surname" name="surname" placeholder="Indtast Efternavn">
+    <input type="text" id="surname" name="lastname" placeholder="Indtast Efternavn">
 
     <label for="email"> Email</label>
-    <input type="text" id="email" name="email" placeholder="Indtast email">
+    <input type="text" id="email" name="email" placeholder="Indtast Email">
 
     <label for="email">Adresse</label>
     <input type="text" id="adresse" name="adresse" placeholder="Indtast Adresse">
-  <div id="card-element" style="">
+    <div class="stripeElement">
+  <div id="card-element">
     <!-- Elements will create input elements here -->
             </div>
   <!-- We'll put the error messages in this element -->
   <div id="card-errors" role="alert"></div>
+  </div>
   <button id="submit">Betal</button>
 </form>
             </div>
@@ -146,12 +148,16 @@ echo "<input id=\"clientsecretelement\" type=\"hidden\" data-client-secret=\"$cl
 require 'includes/dbh.inc.php';
 
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-$sql = "INSERT INTO `order`(`customerID`, `price`, `clientsecret`, `status`, `payment_intent_id`) VALUES (?,?,?,?,?);";
+$sql = "INSERT INTO `order`(`customerID`, `name`, `price`, `clientsecret`, `status`, `payment_intent_id`, `date`) VALUES (?,?,?,?,?,?,?);";
 $stmt = mysqli_stmt_init($conn);
 mysqli_stmt_prepare($stmt, $sql);
 
 $status = "awaiting payment";
-mysqli_stmt_bind_param($stmt, "idsss",$custId, $total, $client_secret, $status, $payment_intent_id);
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+$name = $firstname . ' ' . $lastname;
+$date = date("Y-m-d H:i:s");
+mysqli_stmt_bind_param($stmt, "sssssss",$custId, $name, $total, $client_secret, $status, $payment_intent_id, $date);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
@@ -164,9 +170,19 @@ $result = mysqli_stmt_get_result($stmt);
   const stripe = Stripe('pk_test_EBSvb5G5W6b9Syls0QHSf9XV00ybOy7VZA');
   const elements = stripe.elements();
   var style = {
-      base: {
-          color: "#32325d",
-      }
+    base: {
+    color: '#303238',
+    fontSmoothing: 'antialiased',
+    '::placeholder': {
+      color: '#000',
+    },
+  },
+  invalid: {
+    color: '#e5424d',
+    ':focus': {
+      color: '#303238',
+    },
+  },
   };
   
   const card = elements.create("card", {style: style});

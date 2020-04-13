@@ -14,7 +14,7 @@
           <div class="main">
             <div class="box1">
               <h2>Nulstil din kode her</h2>
-              <p>Vi har sender en email med yderligere instruktioner til hvordan du nulstiller koden, når du har indtastet emailen og trykket "Send email"</p>
+              <p>Vi har sendt en email med yderligere instruktioner til hvordan du nulstiller koden, når du har indtastet emailen og trykket "Send email"</p>
             </div>
 
   <!-- Main div -->
