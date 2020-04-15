@@ -66,11 +66,30 @@ session_start();
     <label for="email">Adresse</label>
     <input type="text" id="adresse" name="adresse"
     <?php if (isset($_SESSION['user_id'])) {
-              $adress = $row['user_adress'];
-              echo 'value="' . $adress . '"';
+              $adresse = $row['user_adresse'];
+              echo 'value="' . $adresse . '"';
             } else {
               echo 'placeholder="Indtast Adresse"';
             } ?> >
+    
+    <label for="email">Postnummer</label>
+    <input type="text" id="postnr" name="postnr"
+    <?php if (isset($_SESSION['user_id'])) {
+              $postnr = $row['user_postnr'];
+              echo 'value="' . $postnr . '"';
+            } else {
+              echo 'placeholder="Indtast Postnummer"';
+            } ?> >
+
+    <label for="email">By</label>
+    <input type="text" id="by" name="by"
+        <?php if (isset($_SESSION['user_id'])) {
+                  $by = $row['user_by'];
+                  echo 'value="' . $by . '"';
+                } else {
+                  echo 'placeholder="Indtast By"';
+                } ?> >
+
     <div class="stripeElement">
   <div id="card-element">
     <!-- Elements will create input elements here -->
@@ -215,14 +234,26 @@ $result = mysqli_stmt_get_result($stmt);
   const form = document.getElementById('payment-form');
 
   form.addEventListener('submit', function(ev) {
+    var name = document.querySelector('input[name="name"]').value;
+  var email = document.querySelector('input[name="email"]').value;
+  var address = document.querySelector('input[name="adresse"]').value;
+  var postalCode = document.querySelector('input[name="postnr"]').value;
+  var city = document.querySelector('input[name="by"]').value;
   ev.preventDefault();
   stripe.confirmCardPayment(clientSecret, {
   payment_method: {
   card: card,
   billing_details: {
-  email: document.querySelector('input[name="email"]').value,
-  name: document.querySelector('input[name="name"]').value,
-  }
+  email: email,
+  name: name,
+    address: {
+            city: city,
+            country: null,
+            line1: address,
+            line2: null,
+            postal_code: postalCode,
+          },
+    }
   }
   }).then(function(result) {
   if (result.error) {
@@ -242,7 +273,7 @@ $result = mysqli_stmt_get_result($stmt);
   // post-payment actions.
   }
   console.log("redirect so we can make php check with stripe and update if succeeded or failed");
-  window.location.replace('afterpayment.php?paymentIntentID=' + paymentIntentID);
+  window.location.replace('afterpayment.php?paymentIntentID=' + paymentIntentID + '&name=' + name + '&address=' + address + '&city=' + city + '&postalcode=' + postalCode + '&email=' + email);
 
   }
   });
