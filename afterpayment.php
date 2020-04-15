@@ -1,12 +1,13 @@
-#THIS IS FOR TESTING PURPOSES ONLY. When we move to testing on a real server we should setup a webhook
 <?php
+session_cache_limiter(FALSE);
+session_start();
+header('Cache-control: private');
 
 use Stripe\Exception\ApiErrorException;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
 $paymentIntentID = $_GET["paymentIntentID"];
-echo "<h1>$paymentIntentID</h1>";
 #lets check how it went with stripe and update payment status in db
 
 require_once('includes/stripe-php-7.28.0/init.php');
@@ -19,8 +20,6 @@ try {
 }
 
 $status = $paymentIntent["status"];
-echo "<div>$paymentIntentID</div>";
-echo "<div>$status</div>";
 
 require 'includes/dbh.inc.php';
 
@@ -32,13 +31,43 @@ mysqli_stmt_bind_param($stmt, "ss",$status, $paymentIntentID);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
-session_start();
-session_unset();
-session_destroy();
-session_write_close();
-setcookie(session_name(),'',0,'/');
-session_regenerate_id(true);
+$email = $_POST['email'];
+$sql = "SELECT * FROM zoouser WHERE user_email=?";
+if (!mysqli_stmt_prepare($stmt, $sql)) {
+    header("Location: index.php?error=sqlerror1");
+    exit();
+  }
+  else {
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $resultCheck = mysqli_stmt_num_rows($stmt);
+  }
+  if ($resultCheck > 0) {
+    $to = $email;
 
-header ("location: index.php?status=success");
-exit();
+    $subjekt = 'Tak for dit køb';
+    
+    $message = '<p>Vi har modtaget din forspørgsel om at nulstille koden. Kopier linket nedenunder for at lave en ny kode.</p>';
+    $message .= '<p>Her er linket til nulstilningen:</p>';
+    
+    $headers = "From: ZooShoppen <solskovjensenWOM@gmail.com>\r\n";
+    $headers .= "Rely-To: <solskovjensenWOM@gmail.com>\r\n";
+    $headers .= "Content-type: text/html\r\n";
+  } else {
+    $to = "glubiz13808@hotmail.com";
+
+    $subjekt = 'Nulstil din kode';
+
+    $message = '<p>Vi har modtaget din forspørgsel om at nulstille koden. Kopier linket nedenunder for at lave en ny kode.</p>';
+    $message .= '<p>Her er linket til nulstilningen:</p>';
+
+    $headers = "From: ZooShoppen <solskovjensenWOM@gmail.com>\r\n";
+    $headers .= "Rely-To: <solskovjensenWOM@gmail.com>\r\n";
+    $headers .= "Content-type: text/html\r\n";
+  }
+
+  unset($_SESSION['cart']);
+
+exit(header ("location: index.php?status=success"));
 ?>

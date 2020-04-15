@@ -23,18 +23,6 @@ session_start();
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
             <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger"><img src="images/cart_hvid.png" width="10%"></a></div>
             <div class="test">
-            <?php
-              /*if (isset($_SESSION['user_id'])) {
-                $user = $_SESSION['user_email'];
-                echo '<p>Welcome ' . $user . '</p>
-                <form action="includes/logout.inc.php" method="post">
-                <div id="button1"><button type="submit" name="logout-submit">Logout</button>
-                </form></div>';
-                 }
-                 else {
-                 echo '<p>You are logged out</p>';
-                }*/
-                ?>
             </div>
         </div>
         <!-- main div-->
@@ -44,18 +32,45 @@ session_start();
             <!-- valg div-->
             <div class="box2">
             <div class="payment">
-  <form id="payment-form" action="checkout.inc.php" method="POST">
-    <label for="fname"> Fornavn</label>
-    <input type="text" id="fname" name="firstname" placeholder="Indtast Navn">
+  <form id="payment-form" method="POST">
+    <label for="fname">Fornavn</label>
+    <input type="text" id="fname" name="name"
+    <?php if (isset($_SESSION['user_id'])) {
+            $user = $_SESSION['user_email'];
+            require 'includes/dbh.inc.php';
+            $sql = "SELECT * FROM zoouser WHERE user_email=?";
+            $stmt = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                header("Location: ../index.php?error=sqlerror1");
+                exit();
+              } else {
+                mysqli_stmt_bind_param($stmt, "s", $user);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+              } 
+              $row = mysqli_fetch_assoc($result);
+            $name = $row['user_name'];
+            echo 'value="' . $name . '"';
+         } else {
+          echo 'placeholder="Indtast Fulde Navn"';
+         } ?> >
 
-    <label for="email">Efternavn</label>
-    <input type="text" id="surname" name="lastname" placeholder="Indtast Efternavn">
-
-    <label for="email"> Email</label>
-    <input type="text" id="email" name="email" placeholder="Indtast Email">
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" 
+        <?php if (isset($_SESSION['user_id'])) {
+                echo 'value="' . $user . '"';
+         } else {
+          echo 'placeholder="Indtast Email"';
+         } ?> >
 
     <label for="email">Adresse</label>
-    <input type="text" id="adresse" name="adresse" placeholder="Indtast Adresse">
+    <input type="text" id="adresse" name="adresse"
+    <?php if (isset($_SESSION['user_id'])) {
+              $adress = $row['user_adress'];
+              echo 'value="' . $adress . '"';
+            } else {
+              echo 'placeholder="Indtast Adresse"';
+            } ?> >
     <div class="stripeElement">
   <div id="card-element">
     <!-- Elements will create input elements here -->
@@ -63,7 +78,7 @@ session_start();
   <!-- We'll put the error messages in this element -->
   <div id="card-errors" role="alert"></div>
   </div>
-  <button id="submit">Betal</button>
+  <input type="submit" id="submit" value="Betal">
 </form>
             </div>
 <div class="t2">
@@ -129,6 +144,8 @@ try {
         'currency' => 'dkk',
         // Verify your integration in this guide by including this parameter
         'metadata' => ['integration_check' => 'accept_a_payment'],
+        'receipt_email' => 'glubiz13808@hotmail.com',
+
     ]);
 } catch (\Stripe\Exception\ApiErrorException $e) {
     print($e);
@@ -137,13 +154,10 @@ try {
 
 #save clientsecret with the order information
 
-
-
 #output to page so we can use it for stripe payment
 $client_secret = $intent["client_secret"];
 $payment_intent_id = $intent["id"];
 echo "<input id=\"clientsecretelement\" type=\"hidden\" data-client-secret=\"$client_secret\", data-payment-intent-id=\"$payment_intent_id\">";
-
 
 require 'includes/dbh.inc.php';
 
@@ -153,9 +167,11 @@ $stmt = mysqli_stmt_init($conn);
 mysqli_stmt_prepare($stmt, $sql);
 
 $status = "awaiting payment";
+
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $name = $firstname . ' ' . $lastname;
+
 $date = date("Y-m-d H:i:s");
 mysqli_stmt_bind_param($stmt, "sssssss",$custId, $name, $total, $client_secret, $status, $payment_intent_id, $date);
 mysqli_stmt_execute($stmt);
@@ -204,7 +220,8 @@ $result = mysqli_stmt_get_result($stmt);
   payment_method: {
   card: card,
   billing_details: {
-  name: "John Doe"
+  email: document.querySelector('input[name="email"]').value,
+  name: document.querySelector('input[name="name"]').value,
   }
   }
   }).then(function(result) {

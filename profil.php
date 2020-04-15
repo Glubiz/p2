@@ -48,13 +48,8 @@ header('Cache-control: private');
                           </div>
                           <div class="box2">';
 
-                        $dbServername = "mysql35.unoeuro.com";
-                        $dbUsername = "solskov_jensen_dk";
-                        $dbPassword = "JKQ1TGTK";
-                        $dbName = "solskov_jensen_dk_db";
-      
-                        // Create connection
-                        $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+                          include "includes/dbh.inc.php";
+                          $conn->set_charset("utf8");
       
                         $sql = "SELECT * FROM zoobuy WHERE user_email=? ORDER BY user_dato DESC";
                         $stmt = mysqli_stmt_init($conn);

@@ -2,6 +2,7 @@
 session_cache_limiter(FALSE);
 session_start();
 header('Cache-control: private');
+header('Content-Type: text/html; charset=utf-8');
     $dbServername = "mysql35.unoeuro.com";
     $dbUsername = "solskov_jensen_dk";
     $dbPassword = "JKQ1TGTK";
@@ -73,7 +74,7 @@ header('Cache-control: private');
         <!-- header div-->
         <div class="header">
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
-            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger"><img src="images/cart_hvid.png" width="10%"></a></div>
+        <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="images/cart_hvid.png" width="10%"></a></div>
             <div class="test">
             <?php
               /*if (isset($_SESSION['user_id'])) {
@@ -101,13 +102,8 @@ header('Cache-control: private');
             <?php
             $type = 'Billet';
 
-            $dbServername = "mysql35.unoeuro.com";
-            $dbUsername = "solskov_jensen_dk";
-            $dbPassword = "JKQ1TGTK";
-            $dbName = "solskov_jensen_dk_db";
-                
-            // Create connection
-            $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+            $conn->set_charset("utf8");
+
             $sql = "SELECT * FROM products WHERE product_type=?";
             $stmt = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -156,7 +152,7 @@ header('Cache-control: private');
                                             <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
                                         </td>
                                         <td>
-                                            <input type="number" name="quantity" value="0" min="0">
+                                            <input type="number" name="quantity" placeholder="0" min="0">
                                         </td>
                                         <td>
                                         <input type="submit" name="add" style="margin-top: 5px;"
@@ -174,60 +170,9 @@ header('Cache-control: private');
         </div>
     </div>
 
-    <!-- Kurv -->
-    <div id="mover">
-    <div id="fill"></div>
-    <div id="kurv">
-    <div class="box1">
-                <h1>Din kurv</h1>
-            </div>
-            <!-- valg div-->
-            <div class="box2">
-            <div class="table-responsive">
-            <table class="table table-bordered">
-            <tr>
-                <th width="30%">Product Name</th>
-                <th width="10%">Quantity</th>
-                <th width="13%">Price Details</th>
-                <th width="10%">Total Price</th>
-                <th width="17%">Remove Item</th>
-            </tr>
- 
-            <?php
-                if(!empty($_SESSION["cart"])){
-                    $total = 0;
-                    foreach ($_SESSION["cart"] as $key => $value) {
-                        ?>
-                        <tr>
-                            <td><?php echo $value["item_name"]; ?></td>
-                            <td><?php echo $value["item_quantity"]; ?></td>
-                            <td><?php echo $value["product_price"]; ?> DKK</td>
-                            <td>
-                                 <?php echo number_format($value["item_quantity"] * $value["product_price"], 2); ?> DKK</td>
-                            <td><a href="dagsbillet.php?action=delete&id=<?php echo $value["product_id"]; ?>"><span
-                                        class="text-danger">Fjern Produkt</span></a></td>
-                        </tr>
-                        <?php
-                        $total = $total + ($value["item_quantity"] * $value["product_price"]);
-                    }
-                        ?>
-                        <tr>
-                            <td colspan="3" align="right">Total</td>
-                            <th align="right"><?php echo number_format($total, 2); ?> DKK</th>
-                            <td></td>
-                        </tr>
-                        <?php
-                    } else {
-                        echo "<div class='fail'><h1 id='fail'>Kurven er tom</h1></div>";
-                    }
-                ?>
-            </table>
-            <!-- add to card div-->
-            <div class="box3" id="hidden"><a href="checkout.php"><button>Til Betaling</button></a></div>
-        </div>
-        </div>
-        </div>
-        </div>
+    <?php
+    include "cart.php";
+?> 
 
     <!-- Javascript bliver her brugt til at udregne pris, samt vise hvor mange af de forskellige billetter der er bestilt -->
     <script>
