@@ -1,319 +1,459 @@
-body{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    background-image: url("../images/IMG_6546.JPG");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 0px;
-    -webkit-overflow-x: hidden;
-    -moz-overflow-x: hidden;
-    -o-overflow-x: hidden;
-    overflow-x: hidden;
+body {
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	background-image: url("../images/IMG_6546.JPG");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 0px;
+	-webkit-overflow-x: hidden;
+	-moz-overflow-x: hidden;
+	-o-overflow-x: hidden;
+	overflow-x: hidden;
 }
 
-h3{
-    font-weight: lighter;
+h3 {
+	font-weight: lighter;
 }
 
-.grid{
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(12, 1fr);
-    grid-gap: 1 em;
-    grid-auto-rows: minmax(10px,auto);
-    grid-auto-columns: minmax(10px,auto);
-    grid-template-areas: 
-    "h h h h h h h h h h h h"
-    "h h h h h h h h h h h h"
-    "h h h h h h h h h h h h"
-    "m m m m m m m m m m m m"
-    "m m m m m m m m m m m m"
-    "m m m m m m m m m m m m"
-    "m m m m m m m m m m m m"
-    "m m m m m m m m m m m m"
-    "m m m m m m m m m m m m"
-    "m m m m m m m m m m m m"
-    "m m m m m m m m m m m m"
-    "m m m m m m m m m m m m";
-    height: 100vh;
-    width: 100vw;
+.grid {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(12, 1fr);
+	grid-gap: 1 em;
+	grid-auto-rows: minmax(10px, auto);
+	grid-auto-columns: minmax(10px, auto);
+	grid-template-areas: "h h h h h h h h h h h h" "h h h h h h h h h h h h" "h h h h h h h h h h h h"
+		"m m m m m m m m m m m m" "m m m m m m m m m m m m" "m m m m m m m m m m m m" "m m m m m m m m m m m m"
+		"m m m m m m m m m m m m" "m m m m m m m m m m m m" "m m m m m m m m m m m m" "m m m m m m m m m m m m"
+		"m m m m m m m m m m m m";
+	height: 100vh;
+	width: 100vw;
 }
 
-.header{
-    grid-area: h;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: 
-    "l l t t c"
-    "l l t t c";
-    text-align: end;
+.header {
+	grid-area: h;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: 1fr 1fr;
+	grid-template-areas: "l l t t c" "l l t t c";
+	text-align: end;
 }
 
-.test{
-    grid-area: t;
-    font-size: 2em;
-    color: rgb(255, 153, 0);
-    opacity: 95%;
-    text-align: center;
-    align-self: center;
+.test {
+	grid-area: t;
+	font-size: 2em;
+	color: rgb(255, 153, 0);
+	opacity: 95%;
+	text-align: center;
+	align-self: center;
 }
 
-.logo{
-    grid-area: l;
-    align-self: center;
-    text-align: center;
+.logo {
+	grid-area: l;
+	align-self: center;
+	text-align: center;
 }
 
 .logo > a > img {
-    width: 65%;
-    padding: 10%;
+	width: 65%;
+	padding: 10%;
 }
 
-.cart{
-    grid-area: c;
-    font-size: 2em;
-    text-align: center;
-    align-self: center;
-    padding-right: 10%;
+.cart {
+	grid-area: c;
+	font-size: 2em;
+	text-align: center;
+	align-self: center;
+	padding-right: 10%;
 }
 
 .cart > a > img {
-    width: 20%;
-    opacity: 90%;
+	width: 20%;
+	opacity: 90%;
 }
 
-.main{
-    grid-area: m;
-    display: grid;
-    grid-template-columns: 1fr 15fr 1fr;
-    grid-template-rows: 1fr 4fr 1fr;
-    grid-gap: 1em;
-    grid-template-areas: 
-    ". b ."
-    ". n ."
-    ". m .";
+.main {
+	grid-area: m;
+	display: grid;
+	grid-template-columns: 1fr 15fr 1fr;
+	grid-template-rows: 1fr 4fr 1fr;
+	grid-gap: 1em;
+	grid-template-areas: ". b ." ". n ." ". m .";
 }
 
-
-.box2{
-    grid-area: n;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 3fr;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-areas: 
-    "k1 k2 k3 e"
-    "m m m e";
-    text-align: center;
-    grid-gap: 2em;
+.box1 {
+	text-align: center;
+	background-color: rgb(255, 153, 0, 0.8);
 }
 
-.k1{
-    grid-area: k1;
+.box1 h1 {
+	font-size: 3em;
+	color: #eee;
 }
 
-.k1 > a > button, .k2 > a > button, .k3 > a > button, .k4 > a > button{
-    width: 90%;
-    height: 90%;
-    background-color: rgba(255, 153, 0, 0.8);
-    border: 1px rgba(255, 153, 0, 0.8) solid;
-    font-size: 2em;
-    color: #eee;
-
+.box2 {
+	grid-area: n;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 3fr;
+	grid-template-rows: repeat(2, 1fr);
+	grid-template-areas: "k1 k2 k3 e" "m m m e";
+	text-align: center;
+	grid-gap: 2em;
 }
 
-.k1 > a > button:hover, .k2 > a > button:hover, .k3 > a > button:hover, .k4 > a > button:hover{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(196, 117, 0, 0.9);
-    border: 1px rgb(196, 117, 0, 0.9) solid;
-    font-size: 2em;
+.table-responsive,
+.table,
+.table-bordered {
+	grid-column: 1/5;
+	grid-row: 1;
+	width: 100%;
 }
 
-
-.k2{
-    grid-area: k2;
+.table a {
+	text-decoration: none;
+	color: black;
 }
 
-.k3{
-    grid-area: k3;
+tr:nth-child(even) {
+	background-color: #ccc;
+}
+table th,
+table td {
+	text-align: center;
+	border-bottom: #eee 1px solid;
+	font-size: 1.2em;
+	padding-top: 1%;
 }
 
-.eventkalender{
-    grid-area: e;
-    background-color: rgba(255, 153, 0, 0.8);
-    color: #eee;
+.k1 {
+	grid-area: k1;
 }
 
-.eo{
-    width: 100%;
-    height: 5%;
-    color: #eee;
+.k1 > a > button,
+.k2 > a > button,
+.k3 > a > button,
+.k4 > a > button {
+	width: 90%;
+	height: 90%;
+	background-color: rgba(255, 153, 0, 0.8);
+	border: 1px rgba(255, 153, 0, 0.8) solid;
+	font-size: 2em;
+	color: #eee;
 }
 
-.eb{
-    width: 100%;
-    height: 90%;
-    background-color: rgb(238, 238, 238, 0.8);
-    color: rgb(255, 153, 0);
+.k1 > a > button:hover,
+.k2 > a > button:hover,
+.k3 > a > button:hover,
+.k4 > a > button:hover {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(196, 117, 0, 0.9);
+	border: 1px rgb(196, 117, 0, 0.9) solid;
+	font-size: 2em;
 }
 
-.box3{
-    grid-area: m;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+.k2 {
+	grid-area: k2;
+}
+
+.k3 {
+	grid-area: k3;
+}
+
+.eventkalender {
+	grid-area: e;
+	background-color: rgba(255, 153, 0, 0.8);
+	color: #eee;
+}
+
+.eo {
+	width: 100%;
+	height: 5%;
+	color: #eee;
+}
+
+.eb {
+	width: 100%;
+	height: 90%;
+	background-color: rgb(238, 238, 238, 0.8);
+	color: rgb(255, 153, 0);
+}
+
+.box3 {
+	grid-area: m;
+	width: 100%;
+	height: 100%;
+	text-align: center;
 }
 
 .box3 > a > button {
-    width: 100%;
-    height: 50%;
-    background-color: rgba(255, 153, 0, 0.8);
-    border: 1px rgb(255, 153, 0, 0.8) solid;
-    color: #eee;
-    font-size: 2em;
-    text-decoration: none;
+	width: 100%;
+	height: 50%;
+	background-color: rgba(255, 153, 0, 0.8);
+	border: 1px rgb(255, 153, 0, 0.8) solid;
+	color: #eee;
+	font-size: 2em;
+	text-decoration: none;
 }
 
-.box3 > button{
-    grid-row: 6/10;
-    grid-column: 1/7;
-    border-radius: 0%;
-    font-size: 3em;
-    background-color: rgba(158, 84, 0, 0.8);
-    color: #eee;
+.box3 > button {
+	grid-row: 6/10;
+	grid-column: 1/7;
+	border-radius: 0%;
+	font-size: 3em;
+	background-color: rgba(158, 84, 0, 0.8);
+	color: #eee;
 }
 
+.bbtn {
+	width: 50%;
+	height: 50%;
+	border-radius: 0%;
+	font-size: 3em;
+	background-color: rgba(158, 84, 0, 0.8);
+	color: #eee;
+}
 
 #fill {
-    position: absolute;
-    grid-row: 1/4;
-    grid-column: 1/4;
-    width:100%;
-    height: 100%;
-    background-color: rgba(133, 133, 133, 0.5);
+	position: absolute;
+	grid-row: 1/4;
+	grid-column: 1/4;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(133, 133, 133, 0.5);
 }
-
 
 #mover {
-    position: absolute;
-    right: -100%;
-    top: 0%;
-    width: 100%;
-    height: 100%;
-    -webkit-transition: 0.5s ease-in-out;
-    -moz-transition: 0.5s ease-in-out;
-    -o-transition: 0.5s ease-in-out;
-    transition: 0.5s ease-in-out;
-  }
- 
-.go-left {
-    -webkit-transform: translate(100%,0);
-    -moz-transform: translate(100%,0);
-    -o-transform: translate(100%,0);
-    transform: translate(100%,0)
+	position: absolute;
+	right: -100%;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	-webkit-transition: 0.5s ease-in-out;
+	-moz-transition: 0.5s ease-in-out;
+	-o-transition: 0.5s ease-in-out;
+	transition: 0.5s ease-in-out;
 }
- 
+
+.go-left {
+	-webkit-transform: translate(100%, 0);
+	-moz-transform: translate(100%, 0);
+	-o-transform: translate(100%, 0);
+	transform: translate(100%, 0);
+}
+
 .go-right {
-    -webkit-transform: translate(-100%,0);
-    -moz-transform: translate(-100%,0);
-    -o-transform: translate(-100%,0);
-    transform: translate(-100%,0)
+	-webkit-transform: translate(-100%, 0);
+	-moz-transform: translate(-100%, 0);
+	-o-transform: translate(-100%, 0);
+	transform: translate(-100%, 0);
 }
 
 #fill {
-    position: absolute;
-    left: 0%;
-    top: 0%;
-    width:40%;
-    height: 100%;
-    background-color: rgba(133, 133, 133, 0.5);
+	position: absolute;
+	left: 0%;
+	top: 0%;
+	width: 40%;
+	height: 100%;
+	background-color: rgba(133, 133, 133, 0.5);
 }
 
-#kurv{
-    position: absolute;
-    right: 0%;
-    top: 0%;
-    width:60%;
-    height: 100%;
-    background-color:rgba(238, 238, 238, 0.9);
+#kurv {
+	position: absolute;
+	right: 0%;
+	top: 0%;
+	width: 60%;
+	height: 100%;
+	background-color: rgba(238, 238, 238, 0.9);
 }
 
-
-.fable{
-    grid-row: 1/6;
-    grid-column: 1/7;
-    border: 1px solid #eee;
-    display: table;
-    width: 100%;
-    height: 100%;
-    font-size: 1.5em;
-    font-weight: lighter;
+.fable {
+	grid-row: 1/6;
+	grid-column: 1/7;
+	border: 1px solid #eee;
+	display: table;
+	width: 100%;
+	height: 100%;
+	font-size: 1.5em;
+	font-weight: lighter;
 }
 
 .fr {
-    border: 1px solid #eee;
-    display: table-row; 
+	border: 1px solid #eee;
+	display: table-row;
 }
 .fd {
-    border: 1px solid #eee;
-    display: table-cell; 
-    background-color:rgba(238, 238, 238, 0.8);
+	border: 1px solid #eee;
+	display: table-cell;
+	background-color: rgba(238, 238, 238, 0.8);
+}
+
+/*******************************Calendar Top Navigation*********************************/
+div#calendar {
+	margin: 0px auto;
+	padding: 0px;
+	width: 602px;
+	font-family: Helvetica, "Times New Roman", Times, serif;
+}
+
+div#calendar div.box {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 40px;
+	background-color: #787878;
+}
+
+div#calendar div.header {
+	line-height: 40px;
+	vertical-align: middle;
+	position: absolute;
+	left: 11px;
+	top: 0px;
+	width: 582px;
+	height: 40px;
+	text-align: center;
+}
+
+div#calendar div.header a.prev,
+div#calendar div.header a.next {
+	position: absolute;
+	top: 0px;
+	height: 17px;
+	display: block;
+	cursor: pointer;
+	text-decoration: none;
+	color: #fff;
+}
+
+div#calendar div.header span.title {
+	color: #fff;
+	font-size: 18px;
+}
+
+span.title {
+	text-align: center;
+}
+
+div#calendar div.header a.prev {
+	left: 0px;
+}
+
+div#calendar div.header a.next {
+	right: 0px;
+}
+
+/*******************************Calendar Content Cells*********************************/
+div#calendar div.box-content {
+	border: 1px solid #787878;
+	border-top: none;
+}
+
+div#calendar ul.label {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+div#calendar ul.label li {
+	margin: 0px;
+	padding: 0px;
+	margin-right: 5px;
+	float: left;
+	list-style-type: none;
+	width: 80px;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: middle;
+	text-align: center;
+	color: #000;
+	font-size: 15px;
+	background-color: transparent;
+}
+
+div#calendar ul.dates {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+
+/** overall width = width+padding-right**/
+div#calendar ul.dates li {
+	margin: 0px;
+	padding: 0px;
+	margin-right: 5px;
+	margin-top: 5px;
+	line-height: 80px;
+	vertical-align: middle;
+	float: left;
+	list-style-type: none;
+	width: 80px;
+	height: 80px;
+	font-size: 25px;
+	background-color: #ddd;
+	color: #000;
+	text-align: center;
+}
+
+:focus {
+	outline: none;
+}
+
+div.clear {
+	clear: both;
 }
 
 /* Media queries*/
-@media only screen and (max-width: 1281px){
-    .header{
-        grid-template-areas: 
-        "l l t c c"
-        "l l t c c";
-    }
-    
-    .main{
-        grid-template-areas: 
-        "b b b"
-        "n n n"
-        "m m m";
-    }
+@media only screen and (max-width: 1281px) {
+	.header {
+		grid-template-areas: "l l t c c" "l l t c c";
+	}
 
-    .cart{
-        text-align: end;
-        align-self: center;
-    }
-    .cart > a > img {
-        width: 13%;
-        opacity: 90%;
-    }
+	.main {
+		grid-template-areas: "b b b" "n n n" "m m m";
+	}
 
-    .logo{
-        text-align: start;
-        align-self: center;
-    }
+	.cart {
+		text-align: end;
+		align-self: center;
+	}
+	.cart > a > img {
+		width: 13%;
+		opacity: 90%;
+	}
 
-    .logo > a > img {
-        width: 60%;
-    }
+	.logo {
+		text-align: start;
+		align-self: center;
+	}
 
-    .k1 > a > button, .k2 > a > button, .k3 > a > button, .k4 > a > button{
-        width: 100%;
-        height: 100%;
-        background-color: rgb(255, 153, 0);
-        border: 1px rgb(255, 153, 0) solid;
-        opacity: 60%;
-        font-size: 2em;
-    }
-    
-    .k1 > a > button:hover, .k2 > a > button:hover, .k3 > a > button:hover, .k4 > a > button:hover{
-        width: 120%;
-        height: 120%;
-        background-color: rgb(196, 117, 0);
-        border: 1px rgb(196, 117, 0) solid;
-        opacity: 60%;
-        font-size: 2em;
-    }
-}
+	.logo > a > img {
+		width: 60%;
+	}
 
-@media only screen and (max-width: 480px){
-    .main{
-        background-color: lime;
-    }
+	.k1 > a > button,
+	.k2 > a > button,
+	.k3 > a > button,
+	.k4 > a > button {
+		width: 100%;
+		height: 100%;
+		background-color: rgba(255, 153, 0, 0.8);
+		border: 1px rgba(255, 153, 0, 0.8) solid;
+		font-size: 2em;
+	}
+
+	.k1 > a > button:hover,
+	.k2 > a > button:hover,
+	.k3 > a > button:hover,
+	.k4 > a > button:hover {
+		width: 120%;
+		height: 120%;
+		background-color: rgba(196, 117, 0, 0.9);
+		border: 1px rgba(196, 117, 0, 0.9) solid;
+		font-size: 2em;
+	}
 }

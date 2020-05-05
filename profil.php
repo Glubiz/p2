@@ -39,9 +39,10 @@ header('Cache-control: private');
                       if ($_SESSION['user_email'] == 'test@test.com') {
                        echo '<div class="box1">            
                        <h1>Du er logget ind som admin</h1>
-                       </div><div class="box2"></div>
-                       '; 
-                      } else {
+                       </div><div class="box2">
+                       <h1>Hi</h1>
+                       </div'; 
+                      }else {
                         echo '<!-- overskrift-->
                         <div class="box1">            
                           <h1>Dine køb</h1>

@@ -107,11 +107,10 @@ session_start();
             <div class="table-responsive">
             <table class="table table-bordered">
             <tr>
-                <th width="30%">Product Name</th>
-                <th width="10%">Quantity</th>
-                <th width="13%">Price Details</th>
-                <th width="10%">Total Price</th>
-                <th width="17%">Remove Item</th>
+                <th width="30%">Produkt Navn</th>
+                <th width="10%">Antal</th>
+                <th width="13%">Stk. Pris</th>
+                <th width="20%">Total Pris</th>
             </tr>
  
             <?php
@@ -125,9 +124,6 @@ session_start();
                             <td><?php echo $value["product_price"]; ?> DKK</td>
                             <td>
                                  <?php echo number_format($value["item_quantity"] * $value["product_price"], 2); ?> DKK</td>
-                            <td><a href="dagsbillet.php?action=delete&id=<?php echo $value["product_id"]; ?>"><span
-                                        class="text-danger">Fjern pordukt</span></a></td>
- 
                         </tr>
                         <?php
                         $total = $total + ($value["item_quantity"] * $value["product_price"]);
@@ -136,7 +132,6 @@ session_start();
                         <tr>
                             <td colspan="3" align="right">Total</td>
                             <th align="right"><?php echo number_format($total, 2); ?> DKK</th>
-                            <td></td>
                         </tr>
                         <?php
                     } else {

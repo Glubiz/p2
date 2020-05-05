@@ -11,11 +11,11 @@
             <div class="table-responsive">
             <table class="table table-bordered">
             <tr>
-                <th width="30%">Product Name</th>
-                <th width="10%">Quantity</th>
-                <th width="13%">Price Details</th>
-                <th width="10%">Total Price</th>
-                <th width="17%">Remove Item</th>
+                <th width="30%">Produkt Navn</th>
+                <th width="10%">Antal</th>
+                <th width="13%">Pris</th>
+                <th width="10%">Total Pris</th>
+                <th width="17%">Fjern Produkt</th>
             </tr>
  
             <?php
@@ -52,6 +52,9 @@
                     }
                 ?>
             </table>
+            <?php 
+
+            ?>
             <div class="box4"><a href="checkout.php"><button class="bbtn">Til Betaling</button></a></div>
         </div>
             </div>

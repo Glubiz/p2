@@ -13,7 +13,7 @@
             <div class="main">
               <!-- overskrift-->
               <div class="box1">            
-                    <h3>Login</h3>
+                    <h3>Indtast din nye kode</h3>
                     </div>
                 <!-- valg div-->
                 <div class="box2">
