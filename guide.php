@@ -2,15 +2,8 @@
 session_cache_limiter(FALSE);
 session_start();
 header('Cache-control: private');
-
-        $dbServername = "mysql35.unoeuro.com";
-        $dbUsername = "solskov_jensen_dk";
-        $dbPassword = "JKQ1TGTK";
-        $dbName = "solskov_jensen_dk_db";
-            
-        // Create connection
-        $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-
+header('Content-Type: text/html; charset=utf-8');
+    require "includes/dbh.inc.php";
 
  
     if (isset($_POST["add"])){
@@ -25,7 +18,7 @@ header('Cache-control: private');
                     'item_quantity' => $_POST["quantity"],
                 );
                 $_SESSION["cart"][$count] = $item_array;
-                echo '<script>window.location="aarskort.php"</script>';
+                echo '<script>window.location="guide.php"</script>';
             }else{
                 foreach ($_SESSION["cart"] as $keys => $value){
                     if ($value["product_id"] == $_GET["id"]){
@@ -42,7 +35,7 @@ header('Cache-control: private');
                             $_SESSION["cart"][$count] = $item_array;
                     }
                 }
-                echo '<script>window.location="aarskort.php"</script>';
+                echo '<script>window.location="guide.php"</script>';
             }}
             
         }else{
@@ -61,7 +54,7 @@ header('Cache-control: private');
             foreach ($_SESSION["cart"] as $keys => $value){
                 if ($value["product_id"] == $_GET["id"]){
                     unset($_SESSION["cart"][$keys]);
-                    echo '<script>window.location="aarskort.php"</script>';
+                    echo '<script>window.location="guide.php"</script>';
                 }
             }
         }
@@ -70,8 +63,8 @@ header('Cache-control: private');
 <?php
     include "header.php"
 ?>
- <!-- grid div-->
- <div class="grid">
+    <!-- grid div-->
+    <div class="grid">
         <!-- header div-->
         <div class="header">
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
@@ -94,16 +87,14 @@ header('Cache-control: private');
         <!-- main div-->
         <div class="main">
             <!-- overskrift-->
-            <div class="box1"><h1>Årskort</h1></div>
+            <div class="box1"><h1>Guidede ture</h1></div>
             <!-- valg div-->
             <div class="box2">
 
             <div class="fable">
 
             <?php
-            $type = 'Aarskort';
-            
-            $conn->set_charset("utf8");
+            $type = 'guide';
 
             $sql = "SELECT * FROM products WHERE product_type=?";
             $stmt = mysqli_stmt_init($conn);
@@ -126,12 +117,6 @@ header('Cache-control: private');
                                         <th>
                                             <h2>STK. Pris</h5>
                                         </th>
-                                        <th>
-                                            <h2>Antal</h5>
-                                        </th>
-                                        <th>
-                                            
-                                        </th>
                                     </tr>
                                 </thead>
                                 <?php
@@ -140,7 +125,7 @@ header('Cache-control: private');
  
                     ?>
                     <div class="container">
-                        <form method="post" action="gavekort.php?action=add&id=<?php echo $row["product_id"]; ?>">
+                        <form method="post" action="arrangementer.php?action=add&id=<?php echo $row["product_id"]; ?>">
  
                                 <tbody>
                                     <tr>
@@ -149,15 +134,7 @@ header('Cache-control: private');
                                             <input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>">
                                         </td>
                                         <td>
-                                            <h5><?php echo $row["product_price"]; ?> DKK</h5>
-                                            <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
-                                        </td>
-                                        <td>
-                                            <input type="number" name="quantity" placeholder="0" min="0">
-                                        </td>
-                                        <td>
-                                        <input type="submit" name="add" style="margin-top: 5px;"
-                                       value="Føj til Kurv">
+                                            <h5>Book</h5>
                                         </td>
                                        </tr>
                                     </form>
@@ -170,96 +147,36 @@ header('Cache-control: private');
         </table>
         </div>
     </div>
- <!-- Kurv -->
- <div id="mover">
-    <div id="fill">
-    </div>
-    <div id="kurv">
-    <div class="box1">
-                <h1>Din kurv</h1>
-            </div>
-            <!-- valg div-->
-            <div class="box2">
-            <div class="table-responsive">
-            <table class="table table-bordered">
-            <tr>
-                <th width="30%">Produkt Navn</th>
-                <th width="10%">Antal</th>
-                <th width="13%">Pris</th>
-                <th width="10%">Total Pris</th>
-                <th width="17%">Fjern Produkt</th>
-            </tr>
- 
-            <?php
-                if(!empty($_SESSION["cart"])){
-                    $total = 0;
-                    foreach ($_SESSION["cart"] as $key => $value) {
-                        ?>
-                        <tr>
-                            <td><?php echo $value["item_name"]; ?></td>
-                            <td><?php echo $value["item_quantity"]; ?></td>
-                            <td><?php echo $value["product_price"]; ?> DKK</td>
-                            <td>
-                                 <?php echo number_format($value["item_quantity"] * $value["product_price"], 2); ?> DKK</td>
-                            <td><a href="aarskort.php?action=delete&id=<?php echo $value["product_id"]; ?>"><span>Fjern Produkt</span></a></td>
- 
-                        </tr>
-                        <?php
-                        $total = $total + ($value["item_quantity"] * $value["product_price"]);
-                        if ($total < 0) {
-                            $total = 0;
-                        } else {
-                            $total + ($value["item_quantity"] * $value["product_price"]);
-                        }
-                    }
-                        ?>
-                        <tr>
-                            <td colspan="3" align="right">Total</td>
-                            <th align="right"><?php echo number_format($total, 2); ?> DKK</th>
-                            <td></td>
-                        </tr>
-                        <?php
-                    } else {
-                        echo "<div class='fail'><h1 id='fail'>Kurven er tom</h1></div>";
-                    }
-                ?>
-            </table>
-            <?php 
 
-            ?>
-            <div class="box4"><a href="checkout.php"><button class="bbtn">Til Betaling</button></a></div>
-        </div>
-            </div>
-            <!-- add to card div-->
+    <?php
+    include "cart.php";
+?> 
 
-        </div>
-        </div>
-        </div>
-        <!-- Javascript bliver her brugt til at udregne pris, samt vise hvor mange af de forskellige billetter der er bestilt -->
+    <!-- Javascript bliver her brugt til at udregne pris, samt vise hvor mange af de forskellige billetter der er bestilt -->
     <script>
-        /*localStorage.clear();*/
+        //localStorage.clear();
         // Henter antal børn
-        if (localStorage.getItem("ba") === null) {
-            var ba = 0;
+        if (localStorage.getItem("bad") === null) {
+            var bad = 0;
         } else {
-            var ba = parseFloat(localStorage.getItem("ba"));
-            document.getElementById("barn").innerHTML = ba;
+            var bad = parseFloat(localStorage.getItem("bad"));
+            document.getElementById("barn").innerHTML = bad;
         }
 
         // Henter antal voksene
-        if (localStorage.getItem("va") === null) {
-            var va = 0;
+        if (localStorage.getItem("vad") === null) {
+            var vad = 0;
         } else {
-            var va = parseFloat(localStorage.getItem("va"));
-            document.getElementById("voksen").innerHTML = va;
+            var vad = parseFloat(localStorage.getItem("vad"));
+            document.getElementById("voksen").innerHTML = vad;
         }
 
         // Henter antal voksene
-        if (localStorage.getItem("sa") === null) {
-            var sa = 0;
+        if (localStorage.getItem("sad") === null) {
+            var sad = 0;
         } else {
-            var sa = parseFloat(localStorage.getItem("sa"));
-            document.getElementById("studerende").innerHTML = sa;
+            var sad = parseFloat(localStorage.getItem("sad"));
+            document.getElementById("studerende").innerHTML = sad;
         }
 
         // Sætter timer
@@ -279,116 +196,116 @@ header('Cache-control: private');
 
         // Funktionsknapperne til + - knapperne
         function plusbarn() {
-            document.getElementById("barn").innerHTML = ba += 1;
+            document.getElementById("barn").innerHTML = bad += 1;
             if (y < 0){
                 y = 0;
                 document.getElementById("total").innerHTML = y;
             } else {
-                document.getElementById("total").innerHTML = y += 275;
+                document.getElementById("total").innerHTML = y += 99;
             }
         }
         function minusbarn() {
-            if (ba>0) {
-                document.getElementById("barn").innerHTML = ba -= 1;
+            if (bad>0) {
+                document.getElementById("barn").innerHTML = bad -= 1;
                 if (y < 0){
                 y = 0;
                 document.getElementById("total").innerHTML = y;
                 } else {
-                document.getElementById("total").innerHTML = y -= 275;
+                document.getElementById("total").innerHTML = y -= 99;
                 }
             } else{
-                document.getElementById("barn").innerHTML = ba = 0;
+                document.getElementById("barn").innerHTML = bad = 0;
             }
         }
 
         function plusvoksen() {
-            document.getElementById("voksen").innerHTML = va += 1;
+            document.getElementById("voksen").innerHTML = vad += 1;
             if (y < 0){
                 y = 0;
                 document.getElementById("total").innerHTML = y;
             } else {
-                document.getElementById("total").innerHTML = y += 435;
+                document.getElementById("total").innerHTML = y += 185;
                 }
         }
         function minusvoksen() {
-            if (va>0) {
-                document.getElementById("voksen").innerHTML = va -= 1;
+            if (vad>0) {
+                document.getElementById("voksen").innerHTML = vad -= 1;
                 if (y < 0){
                 y = 0;
                 document.getElementById("total").innerHTML = y;
                 } else {
-                document.getElementById("total").innerHTML = y -= 435;
+                document.getElementById("total").innerHTML = y -= 185;
                 }
             } else{
-                document.getElementById("voksen").innerHTML = va = 0;
+                document.getElementById("voksen").innerHTML = vad = 0;
             }
         }
 
         function plusstu() {
-            document.getElementById("studerende").innerHTML = sa += 1;
+            document.getElementById("studerende").innerHTML = sad += 1;
             if (y < 0){
                 y = 0;
                 document.getElementById("total").innerHTML = y;
             } else {
-                document.getElementById("total").innerHTML = y += 350;
+                document.getElementById("total").innerHTML = y += 148;
                 }
         }
         function minusstu() {
-            if (sa>0) {
-                document.getElementById("studerende").innerHTML = sa -= 1;
+            if (sad>0) {
+                document.getElementById("studerende").innerHTML = sad -= 1;
                 if (y < 0){
                 y = 0;
                 document.getElementById("total").innerHTML = y;
             } else {
-                document.getElementById("total").innerHTML = y -= 350;
+                document.getElementById("total").innerHTML = y -= 148;
                 }
             } else{
-                document.getElementById("studerende").innerHTML = sa = 0;
+                document.getElementById("studerende").innerHTML = sad = 0;
             }
         }
 
         // Sørger for total ikke kan gå i minus
-        if (ba && sa && va == 0) {
+        if (bad && sad && vad == 0) {
             y = 0 
             document.getElementById("total").innerHTML = y;
         }
 
         // Laver globale variabler til kurven
         function buy(){
-            if (ba > 0) {
-                localStorage.setItem("ba", ba);
+            if (bad > 0) {
+                localStorage.setItem("bad", bad);
                 
-                bp = 0;
-                for (let i = 0; i < ba; i++) {
-                var bp = bp += 275;
+                bpd = 0;
+                for (let i = 0; i < bad; i++) {
+                var bpd = bpd += 99;
                 }
-                localStorage.setItem("bp", bp);
+                localStorage.setItem("bpd", bpd);
             } else {
-                localStorage.setItem("ba", ba);
+                localStorage.setItem("bad", bad);
             }
 
-            if (va > 0) {
-                localStorage.setItem("va", va);
+            if (vad > 0) {
+                localStorage.setItem("vad", vad);
 
-                vp = 0;
-                for (let i = 0; i < va; i++) {
-                var vp = vp += 435;
+                vpd = 0;
+                for (let i = 0; i < vad; i++) {
+                var vpd = vpd += 185;
                 }
-                localStorage.setItem("vp", vp);
+                localStorage.setItem("vpd", vpd);
             } else {
-                localStorage.setItem("va", va);
+                localStorage.setItem("vad", vad);
             }
 
-            if (sa > 0) {
-                localStorage.setItem("sa", sa);
+            if (sad > 0) {
+                localStorage.setItem("sad", sad);
 
-                sp = 0;
-                for (let i = 0; i < sa; i++) {
-                var sp = sp += 350;
+                spd = 0;
+                for (let i = 0; i < sad; i++) {
+                var spd = spd += 148;
                 }
-                localStorage.setItem("sp", sp);
+                localStorage.setItem("spd", spd);
             } else {
-                localStorage.setItem("sa", sa);
+                localStorage.setItem("sad", sad);
             }
 
             alert("Kurven er opdateret");
@@ -397,7 +314,8 @@ header('Cache-control: private');
             location.reload();
         }
 
-        var mover = document.getElementById('mover');
+    //Kurv
+      var mover = document.getElementById('mover');
       var trigger = document.querySelector('#trigger');
       var trigger1 = document.querySelector('#fill');
       function showOnClick() {
@@ -415,9 +333,6 @@ header('Cache-control: private');
         document.getElementById("hidden").style.visibility = "hidden";
         
     } else {
-        /*$(".fable .fr:last").before('<div class="fr" id="first"><div class="fd"id="fo">Billettype</div><div class="fd" id="fo">Stk. Pris</div><div class="fd" id="fo">Antal</div></div>');
-        $(".fable .fr:last").before('<div class="fr" id="last"><div class="fd">I alt</div><div class="fd"><button onClick="reset()">Nulstil kurven</button></div><div class="fd"><p id="total"></p></div></div>'); */
-
         // Børne årskort
         if (localStorage.getItem("ba") === null || localStorage.getItem("bp") === null) {
             var ba = 0;
@@ -508,16 +423,6 @@ header('Cache-control: private');
             $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Studernede Årskort Gavekort</p></div><div class="fd"><p>350 DKK</p></div><div class="fd"><p>' + sag + '</p></div></div>');
         }
 
-        // Studerende årskort
-        if (localStorage.getItem("ga") === null || localStorage.getItem("gap") === null) {
-            var ga = 0;
-        } else {
-            var ga = localStorage.getItem("ga");
-            var gap = localStorage.getItem("gap");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Gavekort</p></div><div class="fd"><p>' + gap + ' DKK</p></div><div class="fd"><p>' + ga + '</p></div></div>');
-        }
-
         // Total pris
         if (localStorage.getItem("y") === null || localStorage.getItem("y") === null) {
             var y = 0;
@@ -531,7 +436,6 @@ header('Cache-control: private');
             localStorage.clear();
         }
     }
-        
     </script>
 </body>
 </html>

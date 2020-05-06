@@ -16,11 +16,11 @@ header('Cache-control: private');
                 if ($_SESSION['user_email'] == 'test@test.com') {
                   echo '<div class="test"><h3>Welcome Admin</h3>
                   Here are you options for administarting the webshop...
-                  <div id="button1"><form action="includes/logout.inc.php" method="POST"><button type="submit" name="logout-submit">Logout</button></form></div></div></div>';
+                  <div id="button1"><form action="includes/logout.inc.php" method="POST"><button type="submit" name="logout-submit">Log ud</button></form></div></div></div>';
                 } else {
                 $user = $_SESSION['user_email'];
 
-                echo '<div class="test"><p>Welcome ' . $user . '</p>
+                echo '<div class="test"><p>Du er logget ind som <br>' . $user . '</p>
                 <form action="includes/logout.inc.php" method="post">
                 <div id="button1"><button type="submit" name="logout-submit">Logout</button>
                 </form></div></div></div>';
@@ -79,14 +79,46 @@ header('Cache-control: private');
                         <tr>
                           <td><?php echo $row["user_dato"];?></td>
                           <td><?php echo $row["user_product"];?></td>
-                          <td><?php echo $row["user_prize"];?></td>
+                          <td><?php echo $row["user_price"];?></td>
                         </tr>   
                         <?php
                          }
                         ?>
                         </table>
                         <div class="t2">
-                        <p>Infobox</p>
+                          <p>Dine informationer</p>
+                        <?php
+                          $sql = "SELECT * FROM zoouser WHERE user_email=?";
+                          $stmt = mysqli_stmt_init($conn);
+                        if (!mysqli_stmt_prepare($stmt, $sql)) {
+                          header("Location: ../index.php?error=sqlerror1");
+                          exit();
+                        }
+                        else {
+                          mysqli_stmt_bind_param($stmt, "s", $user);
+                          mysqli_stmt_execute($stmt);
+                          $result = mysqli_stmt_get_result($stmt);
+                        }
+                        while ($row = mysqli_fetch_assoc($result))
+                          {
+                        ?>
+                        <form action="changeInfo.inc.php" method="POST">
+                          <label for="name">Navn</label>
+                          <input type="text" name="name" value="<?php echo $row["user_name"];?>">
+                          <label for="name">Email</label>
+                          <input type="text" name="email" value="<?php echo $row["user_email"];?>">
+                          <label for="name">Adresse</label>
+                          <input type="text" name="adress" value="<?php echo $row["user_adresse"];?>">
+                          <label for="name">Post Nummer</label>
+                          <input type="text" name="postalcode" value="<?php echo $row["user_postnr"];?>">
+                          <label for="name">By</label>
+                          <input type="text" name="city" value="<?php echo $row["user_by"];?>">
+                          <input type="submit" name="changeSubmit" value="Skift">
+                          <?php
+                          }
+                        ?>
+                        </form>
+                  
                         </div>
                         </div> 
                         <?php

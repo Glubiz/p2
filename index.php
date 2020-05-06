@@ -4,7 +4,6 @@ session_start();
 header('Cache-control: private');
 include "includes/dbh.inc.php";
 
- 
     if (isset($_POST["add"])){
         if (isset($_SESSION["cart"])){
             $item_array_id = array_column($_SESSION["cart"],"product_id");
@@ -108,8 +107,9 @@ include "includes/dbh.inc.php";
                 $month = $_GET['month'];
              
             }else if(null==$month){
-     
+                setlocale(LC_ALL, 'da_DK');
                 $month = date("m",time());
+                ucfirst(strftime($month));
              
             }                  
              
@@ -119,7 +119,7 @@ include "includes/dbh.inc.php";
              
             $this->daysInMonth=$this->_daysInMonth($month,$year);  
              
-            $content='<div id="calendar">'.
+            $content='<div class="eventkalender" id="calendar">'.
                             '<div class="box">'.
                             $this->_createNavi().
                             '</div>'.
@@ -153,7 +153,6 @@ include "includes/dbh.inc.php";
         * create the li element for ul
         */
         private function _showDay($cellNumber){
-             
             if($this->currentDay==0){
                  
                 $firstDayOfTheWeek = date('N',strtotime($this->currentYear.'-'.$this->currentMonth.'-01'));
@@ -180,9 +179,9 @@ include "includes/dbh.inc.php";
                 $cellContent=null;
             }
                  
-             
-            return '<li id="li-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
-                    ($cellContent==null?'mask':'').'">'.$cellContent.'</li>';
+             //Her skal der laves href og $_GET på medtager siden
+            return '<a href="booking.php?date='.$this->currentDate.'"><li id="li-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
+                    ($cellContent==null?'mask':'').'">'.$cellContent.'</li></a>';
         }
          
         /**
@@ -234,6 +233,7 @@ include "includes/dbh.inc.php";
             }
              
             if(null==($month)) {
+                setlocale(LC_TIME, "Danish");
                 $month = date("m",time());
             }
              
@@ -264,6 +264,7 @@ include "includes/dbh.inc.php";
                 $year =  date("Y",time()); 
      
             if(null==($month))
+            setlocale(LC_TIME, "Danish");
                 $month = date("m",time());
                  
             return date('t',strtotime($year.'-'.$month.'-01'));
@@ -312,20 +313,17 @@ include "includes/dbh.inc.php";
                 <div class="k1"><a href="dagsbillet.php"><button>Dagsbillet</button></a></div>
                 <div class="k2"><a href="aarskort.php"><button>Årskort</button></a></div>
                 <div class="k3"><a href="gavekort.php"><button>Gavekort</button></a></div>
-                <div class="eventkalender">
-                  <div class="eo"><h2>Kalender</h2></div>
-                  <div class="eb"><p><?php
-                    include 'calendar.php';
-                    
+                  
+                  <p>
+                    <?php
                     $calendar = new Calendar();
                     
                     echo $calendar->show();
-                    ?></p></div>
-                </div>
+                    ?></p>
             
             <div class="box3">
-                <a href="https://aalborgzoo.dk/mad-og-drikke.aspx"><button>Mad og Drikke</button></a>
-                <a href="https://aalborgzoo.dk"><button>Tilbage til hovedsiden</button></a>
+                <a href="guide.php"><button>Guidede ture</button></a>
+                <a href="arrangementer.php"><button>Andre Arragementer</button></a>
             </div>
             </div>
         </div>
@@ -346,130 +344,6 @@ include "includes/dbh.inc.php";
       }
       trigger.addEventListener('click', showOnClick);
       trigger1.addEventListener('click', hideOnClick);
-
-    if (localStorage.getItem("ba") === null && localStorage.getItem("bp") === null && localStorage.getItem("bad") === null && localStorage.getItem("bpd") === null && localStorage.getItem("va") === null && localStorage.getItem("vp") === null && localStorage.getItem("vad") === null && localStorage.getItem("vpd") === null && localStorage.getItem("sa") === null && localStorage.getItem("sp") === null && localStorage.getItem("sad") === null && localStorage.getItem("spd") === null && localStorage.getItem("bag") === null && localStorage.getItem("bpg") === null && localStorage.getItem("vag") === null && localStorage.getItem("vpg") === null && localStorage.getItem("vag") === null && localStorage.getItem("vpg") === null && localStorage.getItem("sag") === null && localStorage.getItem("spg") === null && localStorage.getItem("ga") === null && localStorage.getItem("gap") === null) {
-        document.getElementById("fail").innerHTML = "Kurven er tom";
-        document.getElementById("fable").style.visibility = "hidden";
-        document.getElementById("hidden").style.visibility = "hidden";
-        
-    } else {
-        /*$(".fable .fr:last").before('<div class="fr" id="first"><div class="fd"id="fo">Billettype</div><div class="fd" id="fo">Stk. Pris</div><div class="fd" id="fo">Antal</div></div>');
-        $(".fable .fr:last").before('<div class="fr" id="last"><div class="fd">I alt</div><div class="fd"><button onClick="reset()">Nulstil kurven</button></div><div class="fd"><p id="total"></p></div></div>'); */
-
-        // Børne årskort
-        if (localStorage.getItem("ba") === null || localStorage.getItem("bp") === null) {
-            var ba = 0;
-        } else {
-            var ba = localStorage.getItem("ba");
-            var bp = localStorage.getItem("bp");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Børne Årskort</p></div><div class="fd"><p>275 DKK</p></div><div class="fd"><p>' + ba + '</p></div></div>');
-        }
-
-        // Børne billet
-        if (localStorage.getItem("bad") === null || localStorage.getItem("bpd") === null) {
-            var bad = 0;
-        } else {
-            var bad = localStorage.getItem("bad");
-            var bpd = localStorage.getItem("bpd");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Børne Billetter</p></div><div class="fd"><p>99 DKK</p></div><div class="fd"><p>' + bad + '</p></div></div>');
-        }
-
-        // Voksen årskort
-        if (localStorage.getItem("va") === null || localStorage.getItem("vp") === null) {
-            var va = 0;
-        } else {
-            var va = localStorage.getItem("va");
-            var vp = localStorage.getItem("vp");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Voksen Årskort</p></div><div class="fd"><p>435 DKK</p></div><div class="fd"><p>' + va + '</p></div></div>');
-        }
-
-        // Voksen billet
-        if (localStorage.getItem("vad") === null || localStorage.getItem("vpd") === null) {
-            var vad = 0;
-        } else {
-            var vad = localStorage.getItem("vad");
-            var vpd = localStorage.getItem("vpd");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Voksen Billetter</p></div><div class="fd"><p>185 DKK</p></div><div class="fd"><p>' + vad + '</p></div></div>');
-        }
-
-        // Studerende årskort
-        if (localStorage.getItem("sa") === null || localStorage.getItem("sp") === null) {
-            var sa = 0;
-        } else {
-            var sa = localStorage.getItem("sa");
-            var sp = localStorage.getItem("sp");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Studernede Årskort</p></div><div class="fd"><p>350 DKK</p></div><div class="fd"><p>' + sa + '</p></div></div>');
-        }
-
-        // Studerende billet
-        if (localStorage.getItem("sad") === null || localStorage.getItem("spd") === null) {
-            var sad = 0;
-        } else {
-            var sad = localStorage.getItem("sad");
-            var spd = localStorage.getItem("spd");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Studernede Billetter</p></div><div class="fd"><p>148 DKK</p></div><div class="fd"><p>' + sad + '</p></div></div>');
-        }
-
-        // Børne årskort
-        if (localStorage.getItem("bag") === null || localStorage.getItem("bpg") === null) {
-            var bag = 0;
-        } else {
-            var bag = localStorage.getItem("bag");
-            var bpg = localStorage.getItem("bpg");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Børne Årskort Gavekort</p></div><div class="fd"><p>275 DKK</p></div><div class="fd"><p>' + bag + '</p></div></div>');
-        }
-
-        // Voksen årskort
-        if (localStorage.getItem("vag") === null || localStorage.getItem("vpg") === null) {
-            var vag = 0;
-        } else {
-            var vag = localStorage.getItem("vag");
-            var vpg = localStorage.getItem("vpg");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Voksen Årskort Gavekort</p></div><div class="fd"><p>435 DKK</p></div><div class="fd"><p>' + vag + '</p></div></div>');
-        }
-
-        // Studerende årskort
-        if (localStorage.getItem("sag") === null || localStorage.getItem("spg") === null) {
-            var sag = 0;
-        } else {
-            var sag = localStorage.getItem("sag");
-            var spg = localStorage.getItem("spg");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Studernede Årskort Gavekort</p></div><div class="fd"><p>350 DKK</p></div><div class="fd"><p>' + sag + '</p></div></div>');
-        }
-
-        // Studerende årskort
-        if (localStorage.getItem("ga") === null || localStorage.getItem("gap") === null) {
-            var ga = 0;
-        } else {
-            var ga = localStorage.getItem("ga");
-            var gap = localStorage.getItem("gap");
-            //Jquery
-            $(".fable .fr:last").before('<div class="fr"><div class="fd"><p>Gavekort</p></div><div class="fd"><p>' + gap + ' DKK</p></div><div class="fd"><p>' + ga + '</p></div></div>');
-        }
-
-        // Total pris
-        if (localStorage.getItem("y") === null || localStorage.getItem("y") === null) {
-            var y = 0;
-        } else {
-            var y = parseFloat(localStorage.getItem("y"));
-            document.getElementById("total").innerHTML = "Total pris: " + y;
-        }
-
-        // Nulstil kurven
-        function reset() {
-            localStorage.clear();
-        }
-    }
-        
     </script>
 </body>
 </html>

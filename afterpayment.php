@@ -144,7 +144,7 @@ if($status == "succeeded"){
                 endforeach;
 
                 $message .= '<td>';
-                $message .= $total . ' DKK';
+                $message .= $total/2 . ' DKK';
                 $message .= '</td></tr></table>';
 
                  // knap til brug af billetter
@@ -179,7 +179,6 @@ if($status == "succeeded"){
                     mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $adresse, $postnr, $by);
                     mysqli_stmt_execute($stmt);
                 }
-                mysqli_stmt_close ();
 
                 // Klar gører password creation til brugeren, og generere link til mailen
                 $selector = bin2hex(random_bytes(8));
@@ -206,7 +205,6 @@ if($status == "succeeded"){
                     mysqli_stmt_bind_param($stmt, "ssss", $email, $selector, $hashedToken, $expires);
                     mysqli_stmt_execute($stmt);
                 }
-                mysqli_stmt_close ();
 
                 $created_date = date("Y-m-d H:i:s");
                 $selectorB = bin2hex(random_bytes(8));
@@ -277,7 +275,7 @@ if($status == "succeeded"){
                 endforeach;
 
                 $message .= '<td>';
-                $message .= $total . ' DKK';
+                $message .= $total/2 . ' DKK';
                 $message .= '</td></tr></table>';
 
                 $message .= '<p>Hvis du er interresseret i at oprette dig som bruger, kan du føgle linket nedenfor, for at lave en kode</p>';
