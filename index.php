@@ -142,7 +142,8 @@ include "includes/dbh.inc.php";
                                      
                                     $content.='<div class="clear"></div>';     
                  
-                            $content.='</div>';
+                            $content.='</div><br><div class="ledig">Åbent 10-18</div>
+                            <div class="brugt">Lukket</div>';
                      
             $content.='</div>';
             return $content;   
@@ -180,7 +181,7 @@ include "includes/dbh.inc.php";
             }
                  
              //Her skal der laves href og $_GET på medtager siden
-            return '<a href="booking.php?date='.$this->currentDate.'"><li id="li-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
+            return '<a href="booking.php?date='.$this->currentDate.'"><li id="li'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
                     ($cellContent==null?'mask':'').'">'.$cellContent.'</li></a>';
         }
          
@@ -290,19 +291,13 @@ include "includes/dbh.inc.php";
         <!-- header div-->
         <div class="header">
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
-            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="images/cart_hvid.png" width="10%"></a></div>
+            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="<?php if (isset($_SESSION["cart"])) {
+                echo "images/cart_hvid1.png";
+            } else{
+                echo "images/cart_hvid.png";
+            } ?>" width="10%"></a></div>
             <div class="test">
             <?php
-             /* if (isset($_SESSION['user_id'])) {
-                $user = $_SESSION['user_email'];
-                echo '<p>Welcome ' . $user . '</p>
-                <form action="includes/logout.inc.php" method="post">
-                <div id="button1"><button type="submit" name="logout-submit">Logout</button>
-                </form></div>';
-                 }
-                 else {
-                 echo '<p>You are logged out</p>';
-                }*/
                 ?>
             </div>
         </div>
@@ -320,7 +315,7 @@ include "includes/dbh.inc.php";
                     
                     echo $calendar->show();
                     ?></p>
-            
+
             <div class="box3">
                 <a href="guide.php"><button>Guidede ture</button></a>
                 <a href="arrangementer.php"><button>Andre Arragementer</button></a>

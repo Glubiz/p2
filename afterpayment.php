@@ -158,7 +158,7 @@ if($status == "succeeded"){
                 mail($to, $subjekt, $message, $headers);
 
                 unset($_SESSION['cart']);
-                exit(header ("location: index.php?status=success1"));
+                exit(header ("location: success.php?status=success1"));
 
             } else {
 
@@ -183,7 +183,7 @@ if($status == "succeeded"){
                 // Klar gører password creation til brugeren, og generere link til mailen
                 $selector = bin2hex(random_bytes(8));
                 $token = random_bytes(32);
-                $url = "www.solskov-jensen.dk/p2/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+                $url = "www.solskov-jensen.dk/p2/newUser.php?selector=" . $selector . "&validator=" . bin2hex($token);
                 $expires = date("U") + 1800;
 
                 require "includes/dbh.inc.php";
@@ -293,7 +293,7 @@ if($status == "succeeded"){
 
                 // Fjerner cart session, så kunden ikke kan se hvad der ligger i kurven mere
                 unset($_SESSION['cart']);
-                exit(header ("location: index.php?status=success2"));
+                exit(header ("location: success.php?status=success2"));
             }
         }
 

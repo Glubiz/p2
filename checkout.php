@@ -21,7 +21,11 @@ session_start();
         <!-- header div-->
         <div class="header">
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
-            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger"><img src="images/cart_hvid.png" width="10%"></a></div>
+            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="<?php if (isset($_SESSION["cart"])) {
+                echo "images/cart_hvid1.png";
+            } else{
+                echo "images/cart_hvid.png";
+            } ?>" width="10%"></a></div>
             <div class="test">
             </div>
         </div>
@@ -33,7 +37,7 @@ session_start();
             <div class="box2">
             <div class="payment">
   <form id="payment-form" method="POST">
-    <label for="fname">Fornavn</label>
+    <label for="fname">Navn</label>
     <input type="text" id="fname" name="name"
     <?php if (isset($_SESSION['user_id'])) {
             $user = $_SESSION['user_email'];

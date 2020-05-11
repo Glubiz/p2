@@ -134,7 +134,7 @@ header('Content-Type: text/html; charset=utf-8');
                                             <input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>">
                                         </td>
                                         <td>
-                                            <h5>Book</h5>
+                                            <h5>Benyt vores kalender funktion til booking</h5>
                                         </td>
                                        </tr>
                                     </form>

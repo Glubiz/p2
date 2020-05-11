@@ -9,33 +9,22 @@ header('Cache-control: private');
         <!-- header div-->
         <div class="header">
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
-            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a> <a href="cart.php"><img src="images/cart_hvid.png" width="10%"></a></div>
+            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a> <a id="trigger" href="#"><img src="<?php if (isset($_SESSION["cart"])) {
+                echo "images/cart_hvid1.png";
+            } else{
+                echo "images/cart_hvid.png";
+            } ?>" width="10%"></a></div>
             <!-- Admin check header -->
             <?php
-              if (isset($_SESSION['user_id'])) {
-                if ($_SESSION['user_email'] == 'test@test.com') {
-                  echo '<div class="test"><h3>Welcome Admin</h3>
-                  Here are you options for administarting the webshop...
-                  <div id="button1"><form action="includes/logout.inc.php" method="POST"><button type="submit" name="logout-submit">Log ud</button></form></div></div></div>';
-                } else {
-                $user = $_SESSION['user_email'];
 
-                echo '<div class="test"><p>Du er logget ind som <br>' . $user . '</p>
-                <form action="includes/logout.inc.php" method="post">
-                <div id="button1"><button type="submit" name="logout-submit">Logout</button>
-                </form></div></div></div>';
-
-                }
-                
-              } else {
-                  Echo '<div class="test">You are not logged in</div></div>';
-                } ?> 
+                  Echo '<div class="test"></div></div>'; ?> 
 
                 <!-- Admin check main -->
                 <!-- main div-->
                 <div class="main">
                  <?php
                     if (isset($_SESSION['user_id'])) {
+                      $user =  $_SESSION["user_email"];
                       if ($_SESSION['user_email'] == 'test@test.com') {
                        echo '<div class="box1">            
                        <h1>Du er logget ind som admin</h1>
@@ -45,7 +34,7 @@ header('Cache-control: private');
                       }else {
                         echo '<!-- overskrift-->
                         <div class="box1">            
-                          <h1>Dine køb</h1>
+                          <h1>Din profil</h1>
                           </div>
                           <div class="box2">';
 
@@ -165,7 +154,86 @@ header('Cache-control: private');
               Email: Test1@test.com
               Kode: Test2
       --> 
+      <!-- Kurv -->
+ <div id="mover">
+    <div id="fill">
+    </div>
+    <div id="kurv">
+    <div class="box1">
+                <h1>Din kurv</h1>
+            </div>
+            <!-- valg div-->
+            <div class="box2">
+            <div class="table-responsive">
+            <table class="table table-bordered">
+            <tr>
+                <th width="30%">Produkt Navn</th>
+                <th width="10%">Antal</th>
+                <th width="13%">Pris</th>
+                <th width="10%">Total Pris</th>
+                <th width="17%">Fjern Produkt</th>
+            </tr>
+ 
+            <?php
+                if(!empty($_SESSION["cart"])){
+                    $total = 0;
+                    foreach ($_SESSION["cart"] as $key => $value) {
+                        ?>
+                        <tr>
+                            <td><?php echo $value["item_name"]; ?></td>
+                            <td><?php echo $value["item_quantity"]; ?></td>
+                            <td><?php echo $value["product_price"]; ?> DKK</td>
+                            <td>
+                                 <?php echo number_format($value["item_quantity"] * $value["product_price"], 2); ?> DKK</td>
+                            <td><a href="aarskort.php?action=delete&id=<?php echo $value["product_id"]; ?>"><span>Fjern Produkt</span></a></td>
+ 
+                        </tr>
+                        <?php
+                        $total = $total + ($value["item_quantity"] * $value["product_price"]);
+                        if ($total < 0) {
+                            $total = 0;
+                        } else {
+                            $total + ($value["item_quantity"] * $value["product_price"]);
+                        }
+                    }
+                        ?>
+                        <tr>
+                            <td colspan="3" align="right">Total</td>
+                            <th align="right"><?php echo number_format($total, 2); ?> DKK</th>
+                            <td></td>
+                        </tr>
+                        <?php
+                    } else {
+                        echo "<div class='fail'><h1 id='fail'>Kurven er tom</h1></div>";
+                    }
+                ?>
+            </table>
+            <?php 
+
+            ?>
+            <div class="box4"><a href="checkout.php"><button class="bbtn">Til Betaling</button></a></div>
+        </div>
+                </div>
+
+        </div>
+        </div>
+        </div>
         
     </div>
+    <script>
+       
+       var mover = document.getElementById('mover');
+     var trigger = document.querySelector('#trigger');
+     var trigger1 = document.querySelector('#fill');
+     function showOnClick() {
+         mover.className = mover.className === 'go-right'? 'go-left': 'go-right';
+     }
+     function hideOnClick(){
+       mover.className = mover.className === 'go-left'? 'go-right': 'go-left';
+     }
+     trigger.addEventListener('click', showOnClick);
+     trigger1.addEventListener('click', hideOnClick);
+
+   </script>
 </body>
 </html>

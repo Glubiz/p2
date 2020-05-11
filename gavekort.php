@@ -25,11 +25,11 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                     'item_quantity' => $_POST["quantity"],
                 );
                 $_SESSION["cart"][$count] = $item_array;
-                echo '<script>window.location="gavekort.php"</script>';
+                echo '<script>window.location="gavekort.php"; alert("Produktet er føjet til kurven");</script>';
             }else{
                 foreach ($_SESSION["cart"] as $keys => $value){
-                    if ($value["product_id"] == $_GET["id"]){
-                        unset($_SESSION["cart"][$keys]);
+                    if ($value["item_name"] == $_POST["hidden_name"]){
+                        $_SESSION["cart"][$keys]['item_quantity'] = $_POST["quantity"];
                         $item_array_id = array_column($_SESSION["cart"],"product_id");
                         if (!in_array($_GET["id"],$item_array_id)){
                             $count = count($_SESSION["cart"]);
@@ -42,7 +42,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                             $_SESSION["cart"][$count] = $item_array;
                     }
                 }
-                echo '<script>window.location="gavekort.php"</script>';
+                echo '<script>window.location="gavekort.php"; alert("Produktet er føjet til kurven");</script>';
             }}
         }else{
             $item_array = array(
@@ -60,7 +60,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             foreach ($_SESSION["cart"] as $keys => $value){
                 if ($value["product_id"] == $_GET["id"]){
                     unset($_SESSION["cart"][$keys]);
-                    echo '<script>window.location="gavekort.php"</script>';
+                    echo '<script>window.location="gavekort.php"; alert("Produktet er fjernet fra kurven");</script>';
                 }
             }
         }
@@ -74,7 +74,11 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
         <!-- header div-->
         <div class="header">
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
-        <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="images/cart_hvid.png" width="10%"></a></div>
+        <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="<?php if (isset($_SESSION["cart"])) {
+                echo "images/cart_hvid1.png";
+            } else{
+                echo "images/cart_hvid.png";
+            } ?>" width="10%"></a></div>
             <div class="test">
             <?php
               /*if (isset($_SESSION['user_id'])) {
@@ -153,7 +157,15 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                             <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
                                         </td>
                                         <td>
-                                            <input type="number" name="quantity" placeholder="0" min="0">
+                                            <input type="number" name="quantity" placeholder="0" value="<?php if (isset($_SESSION["cart"])) {
+                                                foreach ($_SESSION["cart"] as $key => $value) {
+                                                    if ($value["item_name"] == $row["product_name"]) {
+                                                        echo $value["item_quantity"];
+                                                    }
+                                                }
+                                            } else {
+                                                echo "";
+                                            } ?>" min="0">
                                         </td>
                                         <td>
                                         <input type="submit" name="add" style="margin-top: 5px;"
