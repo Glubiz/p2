@@ -9,11 +9,13 @@ header('Cache-control: private');
         <!-- header div-->
         <div class="header">
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
-            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a> <a id="trigger" href="#"><img src="<?php if (isset($_SESSION["cart"])) {
+            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png"></a><a id="trigger" href="#"><img src="<?php if (isset($_SESSION["cart"])) {
                 echo "images/cart_hvid1.png";
             } else{
                 echo "images/cart_hvid.png";
-            } ?>" width="10%"></a></div>
+            } ?>"></a><a href="https://aalborgzoo.dk"><p>Tilbage til Aalborg Zoo.dk</p></a></div>
+            <div class="test">
+            </div>
             <!-- Admin check header -->
             <?php
 
@@ -25,12 +27,142 @@ header('Cache-control: private');
                  <?php
                     if (isset($_SESSION['user_id'])) {
                       $user =  $_SESSION["user_email"];
-                      if ($_SESSION['user_email'] == 'test@test.com') {
-                       echo '<div class="box1">            
+                      if ($_SESSION['user_email'] == 'glubben13808@outlook.dk') {
+                        require "includes/dbh.inc.php";
+                       ?>
+                       <div class="box1">            
                        <h1>Du er logget ind som admin</h1>
-                       </div><div class="box2">
-                       <h1>Hi</h1>
-                       </div'; 
+                       </div>
+                       <div class="box2">
+                       <div class="adminb1">
+                        <?php
+                        if (isset($_GET["pris"])) {
+                          $sql = "SELECT * FROM products";
+                        $result = mysqli_query($conn, $sql);
+                          ?>
+                          <h2>Pris i DKK</h2>
+                          <table style="width: 100%;">
+                            <tr>
+                              <th>Produkt navn</th>
+                              <th>Pris i DKK</th>
+                              <th></th>
+                            </tr>
+                          <?php
+                          while ($row = mysqli_fetch_assoc($result))
+                          {
+                            ?>
+                            <tr>
+                        <form action="includes/pris.inc.php" method="POST">
+                        <td><label for="price"><?php echo $row["product_name"]; ?></label></td>
+                        <td><input type="text" name="price" value="<?php echo $row["product_price"]; ?> "></td>
+                        <input type="hidden" value="<?php echo $row["product_id"]; ?>" name="ID">
+                        <input type="hidden" value="<?php echo $row["product_name"]; ?>" name="product">
+                        <td><input type="submit" name="submitPrice" value="Skift pris"></td>
+                        </form>
+                        </tr>
+                        
+                        <?php
+                          }
+                          ?>
+                          </table>
+                       </div>
+                       
+                       <?php
+
+                        } elseif (isset($_GET["product"])) {
+                          $sql = "SELECT DISTINCT product_type FROM products";
+                        $result = mysqli_query($conn, $sql);
+                          ?>
+                          <h2>Tilføj produkt</h2>
+                        <form action="">
+                        
+                        <label for="name">Produkt navn</label>
+                        <input type="text" name="name" value="" placeholder="Produkt navn">
+                        
+                        <label for="pris">Pris</label>
+                        <input type="text" name="pris" value="" placeholder="Produkt navn">
+
+                        <label for="type">Produkt type</label>
+                        <select name="type" id="">
+                          <?php
+                        while ($row = mysqli_fetch_assoc($result))
+                          { ?>
+                          <option value="<?php echo $row["product_type"]; ?>"><?php echo $row["product_type"]; ?></option>
+                          <?php
+                          }
+                          ?>
+                        </select>
+                        <br>
+                          <input type="submit" name="submitPrice" value="Tilføj produkt">
+                        </form>
+                       </div>
+                       <?php
+
+                        } elseif (isset($_GET["time"])) {
+                          ?>
+                          <h2>Skift åbningstider</h2>
+                        <form action="">
+                        
+                        <label for="dateFrom">Fra</label>
+                        <input type="date" name="dateF">
+
+                        <label for="dateFrom">Til</label>
+                        <input type="date" name="dateT">
+                        <br>
+
+                          <label for="time">Åbningstid</label>
+                          <input type="text" name="time">
+
+                          <input type="submit" name="submitPrice" value="Skift åbningstid">
+                        </form>
+                       </div>
+                       <?php
+
+                        } else {
+                          $sql = "SELECT * FROM products";
+                        $result = mysqli_query($conn, $sql);
+                          ?>
+                          <h2>Pris i DKK</h2>
+                          <table style="width: 100%;">
+                            <tr>
+                              <th>Produkt navn</th>
+                              <th>Pris i DKK</th>
+                              <th></th>
+                            </tr>
+                          <?php
+                          while ($row = mysqli_fetch_assoc($result))
+                          {
+                            ?>
+                            <tr>
+                        <form action="includes/pris.inc.php" method="POST">
+                        <td><label for="price"><?php echo $row["product_name"]; ?></label></td>
+                        <td><input type="text" name="price" value="<?php echo $row["product_price"]; ?> "></td>
+                        <input type="hidden" value="<?php echo $row["product_id"]; ?>" name="ID">
+                        <input type="hidden" value="<?php echo $row["product_name"]; ?>" name="product">
+                        <td><input type="submit" name="submitPrice" value="Skift pris"></td>
+                        </form>
+                        </tr>
+                        
+                        <?php
+                          }
+                          ?>
+                          </table>
+                       </div>
+                       
+                       <?php
+                        }
+                        ?>
+                      
+                       <div class="adminb2">
+                          <a href="?pris"><button>Ændre pris</button></a>
+                          <a href="?product"><button>Tilføj produkt</button></a>
+                          <a href="?time"><button>Ret åbningstider</button></a>
+                          <form action="includes/logout.inc.php" method="POST">
+                          <input type="submit" name="submit" value="Log ud">
+                        </form>
+                       </div>
+                       </div
+                       <?php
                       }else {
                         echo '<!-- overskrift-->
                         <div class="box1">            
@@ -106,6 +238,9 @@ header('Cache-control: private');
                           <?php
                           }
                         ?>
+                        </form>
+                        <form action="includes/logout.inc.php" method="POST">
+                          <input type="submit" name="submit" value="Log ud">
                         </form>
                   
                         </div>

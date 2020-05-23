@@ -11,23 +11,15 @@ header('Content-Type: text/html; charset=utf-8');
 ?>
     <!-- grid div-->
     <div class="grid">
-        <!-- header div-->
-        <div class="header">
+       <!-- header div-->
+       <div class="header">
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
-        <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="images/cart_hvid.png" width="10%"></a></div>
+            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="<?php if (isset($_SESSION["cart"])) {
+                echo "images/cart_hvid1.png";
+            } else{
+                echo "images/cart_hvid.png";
+            } ?>" width="10%"></a><a href="https://aalborgzoo.dk"><p>Tilbage til Aalborg Zoo.dk</p></a></div>
             <div class="test">
-            <?php
-              /*if (isset($_SESSION['user_id'])) {
-                $user = $_SESSION['user_email'];
-                echo '<p>Welcome ' . $user . '</p>
-                <form action="includes/logout.inc.php" method="post">
-                <div id="button1"><button type="submit" name="logout-submit">Logout</button>
-                </form></div>';
-                 }
-                 else {
-                 echo '<p>You are logged out</p>';
-                }*/
-                ?>
             </div>
         </div>
         <!-- main div-->

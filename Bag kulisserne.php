@@ -7,20 +7,15 @@
         <!-- header div-->
         <div class="header">
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
-            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="images/cart_hvid.png" width="10%"></a></div>
+            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="
+            <?php if (isset($_SESSION["cart"])) {
+                echo "images/cart_hvid1.png";
+            } elseif (count($_SESSION["cart"]) == 0){
+                echo "images/cart_hvid.png";
+            } else {
+                echo "images/cart_hvid.png";
+            } ?>" width="10%"></a><a href="https://aalborgzoo.dk"><p>Tilbage til Aalborg Zoo.dk</p></a></div>
             <div class="test">
-            <?php
-             /* if (isset($_SESSION['user_id'])) {
-                $user = $_SESSION['user_email'];
-                echo '<p>Welcome ' . $user . '</p>
-                <form action="includes/logout.inc.php" method="post">
-                <div id="button1"><button type="submit" name="logout-submit">Logout</button>
-                </form></div>';
-                 }
-                 else {
-                 echo '<p>You are logged out</p>';
-                }*/
-                ?>
             </div>
         </div>
         <!-- main div-->
@@ -67,7 +62,7 @@
                     <textarea type="text" name="comment" rows="8" cols="80" placeholder="Særlige forbehold eller ønsker"></textarea>
                     </div>
 
-                    <input type="submit" name="bookingSubmit" value="Book">
+                    <input class="bbtn1" type="submit" name="bookingSubmit" value="Book">
                 </form>
                     </div>
                 <div class="t2">

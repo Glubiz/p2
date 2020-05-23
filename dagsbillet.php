@@ -69,24 +69,12 @@ header('Content-Type: text/html; charset=utf-8');
         <!-- header div-->
         <div class="header">
         <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
-        <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="<?php if (isset($_SESSION["cart"])) {
+            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="<?php if (isset($_SESSION["cart"])) {
                 echo "images/cart_hvid1.png";
-            } else{
+            } else {
                 echo "images/cart_hvid.png";
-            } ?>" width="10%"></a></div>
+            } ?>" width="10%"></a><a href="https://aalborgzoo.dk"><p>Tilbage til Aalborg Zoo.dk</p></a></div>
             <div class="test">
-            <?php
-              /*if (isset($_SESSION['user_id'])) {
-                $user = $_SESSION['user_email'];
-                echo '<p>Welcome ' . $user . '</p>
-                <form action="includes/logout.inc.php" method="post">
-                <div id="button1"><button type="submit" name="logout-submit">Logout</button>
-                </form></div>';
-                 }
-                 else {
-                 echo '<p>You are logged out</p>';
-                }*/
-                ?>
             </div>
         </div>
         <!-- main div-->
@@ -112,68 +100,51 @@ header('Content-Type: text/html; charset=utf-8');
               $result = mysqli_stmt_get_result($stmt);
           }
             if(mysqli_num_rows($result) > 0) {
-                ?>
-                <table class="producttable">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <h2>Billettype</h5>
-                                        </th>
-                                        <th>
-                                            <h2>STK. Pris</h5>
-                                        </th>
-                                        <th>
-                                            <h2>Antal</h5>
-                                        </th>
-                                        <th>
-                                            
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <?php
+
+ while ($row = mysqli_fetch_array($result)) {
  
-                while ($row = mysqli_fetch_array($result)) {
- 
-                    ?>
-                    <div class="container">
-                        <form method="post" action="dagsbillet.php?action=add&id=<?php echo $row["product_id"]; ?>">
- 
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <h5><?php echo $row["product_name"]; ?></h5>
-                                            <input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>">
-                                        </td>
-                                        <td>
-                                            <h5><?php echo $row["product_price"]; ?> DKK</h5>
-                                            <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
-                                        </td>
-                                        <td>
-                                            <input type="number" name="quantity" placeholder="0" value="<?php if (isset($_SESSION["cart"])) {
-                                                foreach ($_SESSION["cart"] as $key => $value) {
-                                                    if ($value["item_name"] == $row["product_name"]) {
-                                                        echo $value["item_quantity"];
-                                                    }
-                                                }
-                                            } else {
-                                                echo "";
-                                            } ?>" min="0">
-                                        </td>
-                                        <td>
-                                        <input id="trigger3" type="submit" name="add" style="margin-top: 5px;"
-                                       value="Føj til Kurv">
-                                        </td>
-                                       </tr>
-                                    </form>
-                        </tbody>
-                        </div>
-                    <?php
-                }
-            }
+    ?>
+    <form method="post" action="dagsbillet.php?action=add&id=<?php echo $row["product_id"]; ?>">
+    <div class="container">
+  
+      <div class="cont1">
+        <?php if ($row["product_name"] == "Dagsbillet studerende") {
+          echo '<p>' . $row["product_name"] . '</p> <p class="red">For at benytte billetten skal studiekort fremvises ved indgangen</p>';
+        } else {
+          echo '<p>' . $row["product_name"] . '</p>';
+        }
         ?>
-        </table>
-        </div>
-    </div>
+        <input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>">
+      </div>
+      <div class="cont2">
+        <p>Stk pris: <?php echo $row["product_price"]; ?> DKK</p>
+        <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
+      </div>
+      <div class="cont3">
+        <input type="number" name="quantity" placeholder="0" value="<?php if (isset($_SESSION["cart"])) {
+          foreach ($_SESSION["cart"] as $key => $value) {
+            if ($value["item_name"] == $row["product_name"]) {
+              echo $value["item_quantity"];
+            }
+          }
+        } else {
+          echo "";
+        } ?>" min="0">
+      </div>
+      <div class="cont4">
+        <input id="trigger3" type="submit" name="add" style="margin-top: 5px;"
+        value="Føj til Kurv">
+      </div>
+      
+      </div>
+      </form>
+      
+    <?php
+}
+}
+?>
+</div>
+</div>
 
     <?php
     include "cart.php";

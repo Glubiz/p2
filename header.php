@@ -5,7 +5,8 @@
     <meta charset="utf-8"/>
     <link rel="icon" type="image/gif/png" href="images/images/Aalborg Zoo hvid.png.png">
     <link rel="stylesheet" type="text/css" href="style/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//db.onlinewebfonts.com/c/3ae47b1bb1bbcc5cc123aa52b508eda3?family=AlianzaW03-Slab900" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
     <script>

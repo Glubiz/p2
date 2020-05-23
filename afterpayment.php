@@ -33,7 +33,6 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if($status == "succeeded"){
-    
     require 'includes/dbh.inc.php';
     $sql1 = "SELECT * FROM zoouser WHERE user_email=?";
     $stmt1 = mysqli_stmt_init($conn);
@@ -50,32 +49,6 @@ if($status == "succeeded"){
                 $postnr = strval($_GET["postalcode"]);
                 $by = strval($_GET["city"]);
                 $name = strval($_GET["name"]);
-
-                // Klar gører password creation til brugeren, og generere link til mailen
-                $selector = bin2hex(random_bytes(8));
-                $token = random_bytes(32);
-                $url = "www.solskov-jensen.dk/p2/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
-                $expires = date("U") + 1800;
-
-                require "includes/dbh.inc.php";
-                $sql = "DELETE FROM zoopwdReset WHERE pwdResetEmail=?;";
-                $stmt = mysqli_stmt_init($conn);
-                if (!mysqli_stmt_prepare($stmt, $sql)) {
-                    echo "An error occured!3";
-                } else {
-                    mysqli_stmt_bind_param($stmt, "s", $email);
-                    mysqli_stmt_execute($stmt);
-                }
-                require "includes/dbh.inc.php";
-                $sql = "INSERT INTO zoopwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) VALUES (?, ?, ?, ?);";
-                $stmt = mysqli_stmt_init($conn);
-                if (!mysqli_stmt_prepare($stmt, $sql)) {
-                    echo "An error occured!1";
-                } else {
-                    $hashedToken = password_hash($token, PASSWORD_DEFAULT);
-                    mysqli_stmt_bind_param($stmt, "ssss", $email, $selector, $hashedToken, $expires);
-                    mysqli_stmt_execute($stmt);
-                }
 
                 $created_date = date("Y-m-d H:i:s");
                 $selectorB = bin2hex(random_bytes(8));

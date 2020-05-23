@@ -1,6 +1,7 @@
 <?php
 session_cache_limiter(FALSE);
 session_start();
+setlocale(LC_TIME, 'da-DK');
 header('Cache-control: private');
 include "includes/dbh.inc.php";
 
@@ -16,11 +17,11 @@ include "includes/dbh.inc.php";
                     'item_quantity' => $_POST["quantity"],
                 );
                 $_SESSION["cart"][$count] = $item_array;
-                echo '<script>window.location="dagsbillet.php"</script>';
+                echo '<script>window.location="index.php"</script>';
             }else{
                 foreach ($_SESSION["cart"] as $keys => $value){
                     if ($value["product_id"] == $_GET["id"]){
-                        unset($_SESSION["cart"][$keys]);
+                        $_SESSION["cart"][$keys]['item_quantity'] = $_POST["quantity"];
                         $item_array_id = array_column($_SESSION["cart"],"product_id");
                         if (!in_array($_GET["id"],$item_array_id)){
                             $count = count($_SESSION["cart"]);
@@ -33,7 +34,7 @@ include "includes/dbh.inc.php";
                             $_SESSION["cart"][$count] = $item_array;
                     }
                 }
-                echo '<script>window.location="dagsbillet.php"</script>';
+                echo '<script>window.location="index.php"</script>';
             }}
             
         }else{
@@ -52,7 +53,7 @@ include "includes/dbh.inc.php";
             foreach ($_SESSION["cart"] as $keys => $value){
                 if ($value["product_id"] == $_GET["id"]){
                     unset($_SESSION["cart"][$keys]);
-                    echo '<script>window.location="dagsbillet.php"</script>';
+                    echo '<script>window.location="index.php"</script>';
                 }
             }
         }
@@ -110,6 +111,7 @@ include "includes/dbh.inc.php";
                 setlocale(LC_ALL, 'da_DK');
                 $month = date("m",time());
                 ucfirst(strftime($month));
+                
              
             }                  
              
@@ -201,7 +203,7 @@ include "includes/dbh.inc.php";
             return
                 '<div class="header">'.
                     '<a class="prev" href="'.$this->naviHref.'?month='.sprintf('%02d',$preMonth).'&year='.$preYear.'">Forige Måned</a>'.
-                        '<span class="title">'.date('Y M',strtotime($this->currentYear.'-'.$this->currentMonth.'-1')).'</span>'.
+                        '<span class="title">'.date('M Y',strtotime($this->currentYear.'-'.$this->currentMonth.'-1')).'</span>'.
                     '<a class="next" href="'.$this->naviHref.'?month='.sprintf("%02d", $nextMonth).'&year='.$nextYear.'">Næste Måned</a>'.
                 '</div>';
         }
@@ -265,7 +267,6 @@ include "includes/dbh.inc.php";
                 $year =  date("Y",time()); 
      
             if(null==($month))
-            setlocale(LC_TIME, "Danish");
                 $month = date("m",time());
                  
             return date('t',strtotime($year.'-'.$month.'-01'));
@@ -280,7 +281,8 @@ include "includes/dbh.inc.php";
     <title>Zooshoppen</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="style/style1.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//db.onlinewebfonts.com/c/3ae47b1bb1bbcc5cc123aa52b508eda3?family=AlianzaW03-Slab900" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
   </head>
@@ -295,7 +297,9 @@ include "includes/dbh.inc.php";
                 echo "images/cart_hvid1.png";
             } else{
                 echo "images/cart_hvid.png";
-            } ?>" width="10%"></a></div>
+            } ?>" width="10%"></a>
+            <a href="https://aalborgzoo.dk"><p>Tilbage til Aalborg Zoo.dk</p></a></div>
+
             <div class="test">
             <?php
                 ?>
@@ -309,16 +313,16 @@ include "includes/dbh.inc.php";
                 <div class="k2"><a href="aarskort.php"><button>Årskort</button></a></div>
                 <div class="k3"><a href="gavekort.php"><button>Gavekort</button></a></div>
                   
-                  <p>
+                
                     <?php
                     $calendar = new Calendar();
                     
                     echo $calendar->show();
-                    ?></p>
+                    ?>
 
             <div class="box3">
-                <a href="guide.php"><button>Guidede ture</button></a>
-                <a href="arrangementer.php"><button>Andre Arragementer</button></a>
+                <a href="guide.php" class="box3a"><button>Guidede ture</button></a>
+                <a href="arrangementer.php" class="box3b"><button>Andre Arragementer</button></a>
             </div>
             </div>
         </div>

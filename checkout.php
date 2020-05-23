@@ -25,7 +25,7 @@ session_start();
                 echo "images/cart_hvid1.png";
             } else{
                 echo "images/cart_hvid.png";
-            } ?>" width="10%"></a></div>
+            } ?>" width="10%"></a><a href="https://aalborgzoo.dk"><p>Tilbage til Aalborg Zoo.dk</p></a></div>
             <div class="test">
             </div>
         </div>
@@ -101,7 +101,7 @@ session_start();
   <!-- We'll put the error messages in this element -->
   <div id="card-errors" role="alert"></div>
   </div>
-  <input type="submit" id="submit" value="Betal">
+  <input type="submit" id="submit" class="bbtn1" value="Betal">
 </form>
             </div>
 <div class="t2">

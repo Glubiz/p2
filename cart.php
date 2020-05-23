@@ -9,7 +9,11 @@
             <!-- valg div-->
             <div class="box2">
             <div class="table-responsive">
-            <table class="table table-bordered">
+
+            <?php
+                if(!empty($_SESSION["cart"])){
+                    ?> 
+                    <table class="table table-bordered">
             <tr>
                 <th width="30%">Produkt Navn</th>
                 <th width="10%">Antal</th>
@@ -17,9 +21,7 @@
                 <th width="10%">Total Pris</th>
                 <th width="17%">Fjern Produkt</th>
             </tr>
- 
             <?php
-                if(!empty($_SESSION["cart"])){
                     $total = 0;
                     foreach ($_SESSION["cart"] as $key => $value) {
                         ?>
@@ -53,9 +55,12 @@
                 ?>
             </table>
             <?php 
-
+                if(!empty($_SESSION["cart"])){
+                    echo '<div class="box4"><a href="checkout.php"><button class="bbtn">Til Betaling</button></a></div>';
+                }else{
+                    echo '';
+                }
             ?>
-            <div class="box4"><a href="checkout.php"><button class="bbtn">Til Betaling</button></a></div>
         </div>
             </div>
             <!-- add to card div-->

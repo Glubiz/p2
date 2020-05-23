@@ -66,24 +66,16 @@
         <!-- grid div-->
         <div class="grid">
             <!-- header div-->
-            <div class="header">
-            <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
-            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="images/cart_hvid.png" width="10%"></a></div>
-                <div class="test">
-                <?php
-                  /*if (isset($_SESSION['user_id'])) {
-                    $user = $_SESSION['user_email'];
-                    echo '<p>Welcome ' . $user . '</p>
-                    <form action="includes/logout.inc.php" method="post">
-                    <div id="button1"><button type="submit" name="logout-submit">Logout</button>
-                    </form></div>';
-                     }
-                     else {
-                     echo '<p>You are logged out</p>';
-                    }*/
-                    ?>
-                </div>
+        <div class="header">
+        <div class="logo"><a href="index.php"><img src="images/Aalborg Zoo hvid.png" alt=""></a></div>
+            <div class="cart"><a href="profil.php"><img src="images/user_hvid.png" width="10%"></a><a id="trigger" href="#"><img src="<?php if (isset($_SESSION["cart"])) {
+                echo "images/cart_hvid1.png";
+            } else{
+                echo "images/cart_hvid.png";
+            } ?>" width="10%"></a><a href="https://aalborgzoo.dk"><p>Tilbage til Aalborg Zoo.dk</p></a></div>
+            <div class="test">
             </div>
+        </div>
             <!-- main div-->
             <div class="main">
                 <!-- overskrift-->
@@ -106,47 +98,40 @@
                   mysqli_stmt_execute($stmt);
                   $result = mysqli_stmt_get_result($stmt);
               }
-                if(mysqli_num_rows($result) > 0) {
-                    ?>
-                    <table class="producttable">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                <h2>Billettype</h5>
-                                            </th>
-                                            <th>
 
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <?php
-     
-                    while ($row = mysqli_fetch_array($result)) {
-     
-                        ?>
-                        <div class="container">
-                            <form method="post" action="arrangementer.php?action=add&id=<?php echo $row["product_id"]; ?>">
-     
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <h5><?php echo $row["product_name"]; ?></h5>
-                                                <input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>">
-                                            </td>
-                                            <td>
-                                                <a href="<?php echo $row['product_name'] . '.php?date=' . $_GET['date'];?>"><h5>Book</h5></a>
-                                            </td>
-                                           </tr>
-                                        </form>
-                            </tbody>
-                            </div>
-                        <?php
-                    }
-                }
-            ?>
-            </table>
-            </div>
-        </div>
+              if(mysqli_num_rows($result) > 0) {
+
+                while ($row = mysqli_fetch_array($result)) {
+                
+                   ?>
+                   <div class="container">
+                 
+                     <div class="cont1">
+                       <?php if ($row["product_name"] == "Dagsbillet studerende") {
+                         echo '<p>' . $row["product_name"] . '</p> <p class="red">For at benytte billetten skal studiekort fremvises ved indgangen</p>';
+                       } else {
+                         echo '<p>' . $row["product_name"] . '</p>';
+                       }
+                       ?>
+                     </div>
+                     <div class="cont5">
+                       <p>Prisen varierer alt efter jeres antal</p>
+                       <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
+                     </div>
+                     <div class="cont4">
+                     
+                     <a href="<?php echo $row['product_name'] . '.php?date=' . $_GET['date'];?>"><input type="submit" value="Book"></a>
+                     </div>
+                     
+                     </div>
+                     
+                   <?php
+               }
+               }
+               ?>
+               </div>
+               </div>
+            
     
         <?php
         include "cart.php";
