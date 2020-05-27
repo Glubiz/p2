@@ -322,7 +322,7 @@ include "includes/dbh.inc.php";
 
             <div class="box3">
                 <a href="guide.php" class="box3a"><button>Guidede ture</button></a>
-                <a href="arrangementer.php" class="box3b"><button>Andre Arragementer</button></a>
+                <a href="arrangementer.php" class="box3b"><button>Andre Arrangementer</button></a>
             </div>
             </div>
         </div>

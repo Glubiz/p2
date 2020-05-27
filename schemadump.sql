@@ -7,9 +7,11 @@
 -- Serverversion: 10.4.11-MariaDB
 -- PHP-version: 7.4.4
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE
+= "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone
+= "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,11 +29,16 @@ SET time_zone = "+00:00";
 -- Struktur-dump for tabellen `checkout`
 --
 
-CREATE TABLE `checkout` (
-  `checkout_id` int(11) NOT NULL,
-  `product_name` varchar(128) NOT NULL,
-  `product_price` int(11) NOT NULL,
-  `product_amount` varchar(128) NOT NULL
+CREATE TABLE `checkout`
+(
+  `checkout_id` int
+(11) NOT NULL,
+  `product_name` varchar
+(128) NOT NULL,
+  `product_price` int
+(11) NOT NULL,
+  `product_amount` varchar
+(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -40,13 +47,20 @@ CREATE TABLE `checkout` (
 -- Struktur-dump for tabellen `order`
 --
 
-CREATE TABLE `order` (
-  `orderID` int(11) NOT NULL,
-  `customerID` int(11) NOT NULL,
-  `price` decimal(10,0) NOT NULL,
-  `clientsecret` varchar(100) NOT NULL,
-  `status` varchar(100) NOT NULL,
-  `payment_intent_id` varchar(100) NOT NULL
+CREATE TABLE `order`
+(
+  `orderID` int
+(11) NOT NULL,
+  `customerID` int
+(11) NOT NULL,
+  `price` decimal
+(10,0) NOT NULL,
+  `clientsecret` varchar
+(100) NOT NULL,
+  `status` varchar
+(100) NOT NULL,
+  `payment_intent_id` varchar
+(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -55,11 +69,16 @@ CREATE TABLE `order` (
 -- Struktur-dump for tabellen `products`
 --
 
-CREATE TABLE `products` (
-  `product_id` int(11) NOT NULL,
-  `product_name` varchar(128) NOT NULL,
-  `product_price` int(11) NOT NULL,
-  `product_type` varchar(128) NOT NULL
+CREATE TABLE `products`
+(
+  `product_id` int
+(11) NOT NULL,
+  `product_name` varchar
+(128) NOT NULL,
+  `product_price` int
+(11) NOT NULL,
+  `product_type` varchar
+(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -68,12 +87,18 @@ CREATE TABLE `products` (
 -- Struktur-dump for tabellen `zoobuy`
 --
 
-CREATE TABLE `zoobuy` (
-  `user_id` int(11) NOT NULL,
-  `user_name` varchar(128) NOT NULL,
-  `user_email` varchar(128) NOT NULL,
-  `user_product` varchar(128) NOT NULL,
-  `user_prize` varchar(128) NOT NULL,
+CREATE TABLE `zoobuy`
+(
+  `user_id` int
+(11) NOT NULL,
+  `user_name` varchar
+(128) NOT NULL,
+  `user_email` varchar
+(128) NOT NULL,
+  `user_product` varchar
+(128) NOT NULL,
+  `user_prize` varchar
+(128) NOT NULL,
   `user_dato` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -83,13 +108,28 @@ CREATE TABLE `zoobuy` (
 -- Struktur-dump for tabellen `zoouser`
 --
 
-CREATE TABLE `zoouser` (
-  `user_id` int(11) NOT NULL,
-  `user_name` varchar(128) NOT NULL,
-  `user_email` varchar(128) NOT NULL,
-  `user_password` varchar(128) NOT NULL
+CREATE TABLE `zoouser`
+(
+  `user_id` int
+(11) NOT NULL,
+  `user_name` varchar
+(128) NOT NULL,
+  `user_email` varchar
+(128) NOT NULL,
+  `user_password` varchar
+(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DELIMITER $$
+CREATE EVENT `Weekly_Cleanup`
+  ON SCHEDULE EVERY 7 DAY STARTS '2020-05-01 00:00:00'
+  ON COMPLETION PRESERVE
+DO
+BEGIN
+  delete from zoouser 
+   where user_password='231212d12d';
+END;$$
+DELIMITER ;
 --
 -- Begrænsninger for dumpede tabeller
 --
@@ -98,31 +138,36 @@ CREATE TABLE `zoouser` (
 -- Indeks for tabel `checkout`
 --
 ALTER TABLE `checkout`
-  ADD PRIMARY KEY (`checkout_id`);
+ADD PRIMARY KEY
+(`checkout_id`);
 
 --
 -- Indeks for tabel `order`
 --
 ALTER TABLE `order`
-  ADD PRIMARY KEY (`orderID`);
+ADD PRIMARY KEY
+(`orderID`);
 
 --
 -- Indeks for tabel `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`);
+ADD PRIMARY KEY
+(`product_id`);
 
 --
 -- Indeks for tabel `zoobuy`
 --
 ALTER TABLE `zoobuy`
-  ADD PRIMARY KEY (`user_id`);
+ADD PRIMARY KEY
+(`user_id`);
 
 --
 -- Indeks for tabel `zoouser`
 --
 ALTER TABLE `zoouser`
-  ADD PRIMARY KEY (`user_id`);
+ADD PRIMARY KEY
+(`user_id`);
 
 --
 -- Brug ikke AUTO_INCREMENT for slettede tabeller
@@ -132,31 +177,36 @@ ALTER TABLE `zoouser`
 -- Tilføj AUTO_INCREMENT i tabel `checkout`
 --
 ALTER TABLE `checkout`
-  MODIFY `checkout_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `checkout_id` int
+(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `order`
 --
 ALTER TABLE `order`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `orderID` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int
+(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `zoobuy`
 --
 ALTER TABLE `zoobuy`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `user_id` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `zoouser`
 --
 ALTER TABLE `zoouser`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `user_id` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
