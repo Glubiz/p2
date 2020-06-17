@@ -1,0 +1,867 @@
+@import url(//db.onlinewebfonts.com/c/3ae47b1bb1bbcc5cc123aa52b508eda3?family=AlianzaW03-Slab900);
+@font-face {
+	font-family: "AlianzaW03-Slab900";
+	src: url("//db.onlinewebfonts.com/t/3ae47b1bb1bbcc5cc123aa52b508eda3.eot");
+	src: url("//db.onlinewebfonts.com/t/3ae47b1bb1bbcc5cc123aa52b508eda3.eot?#iefix") format("embedded-opentype"),
+		url("//db.onlinewebfonts.com/t/3ae47b1bb1bbcc5cc123aa52b508eda3.woff2") format("woff2"),
+		url("//db.onlinewebfonts.com/t/3ae47b1bb1bbcc5cc123aa52b508eda3.woff") format("woff"),
+		url("//db.onlinewebfonts.com/t/3ae47b1bb1bbcc5cc123aa52b508eda3.ttf") format("truetype"),
+		url("//db.onlinewebfonts.com/t/3ae47b1bb1bbcc5cc123aa52b508eda3.svg#AlianzaW03-Slab900") format("svg");
+}
+
+body {
+	font-family: 'AlianzaW03-Slab900';
+	text-transform: uppercase;
+	background-image: url("../images/IMG_6546.JPG");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 0px;
+	-webkit-overflow-x: hidden;
+	-moz-overflow-x: hidden;
+	-o-overflow-x: hidden;
+	overflow-x: hidden;
+	-webkit-overflow-y: hidden;
+	-moz-overflow-y: hidden;
+	-o-overflow-y: hidden;
+	overflow-y: hidden;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+h3 {
+	font-weight: lighter;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(12, 1fr);
+	grid-gap: 1em;
+	grid-auto-rows: minmax(10px, auto);
+	grid-auto-columns: minmax(10px, auto);
+	grid-template-areas: "h h h h h h h h h h h h" "h h h h h h h h h h h h" "h h h h h h h h h h h h"
+		"m m m m m m m m m m m m" "m m m m m m m m m m m m" "m m m m m m m m m m m m" "m m m m m m m m m m m m"
+		"m m m m m m m m m m m m" "m m m m m m m m m m m m" "m m m m m m m m m m m m" "m m m m m m m m m m m m"
+		"m m m m m m m m m m m m";
+	height: 100vh;
+	width: 100vw;
+	margin: 0px;
+}
+
+.header {
+	grid-area: h;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: 1fr 1fr;
+	grid-template-areas: "l l t t c" "l l t t c";
+	text-align: end;
+}
+
+.test {
+	align-self: end;
+	justify-self: center;
+	grid-area: t;
+	font-size: 4em;
+	color: rgb(255, 153, 0);
+	opacity: 95%;
+	background-color: rgba(238, 238, 238, 0.8);
+}
+
+.logo {
+	grid-area: l;
+	align-self: center;
+	text-align: center;
+}
+.logo a img {
+	width: 65%;
+	min-width: 200px;
+	max-width: 450px;
+	padding: 10%;
+}
+
+.cart {
+	grid-area: c;
+	font-size: 2em;
+	text-align: center;
+	align-self: center;
+	padding-right: 10%;
+}
+
+.cart > a > img {
+	width: 100px;
+	padding-right: 8%;
+	opacity: 90%;
+}
+
+.cart > a > img:hover {
+	width: 110px;
+	opacity: 100%;
+}
+
+.cart > a > p {
+	font-size: 0.8em;
+	color: #eee;
+}
+
+.cart > a > p:hover {
+	text-decoration: underline;
+	color: rgb(255, 153, 0);
+}
+
+.main {
+	grid-area: m;
+	display: grid;
+	grid-template-columns: 1fr 15fr 1fr;
+	grid-template-rows: 0.1px 4fr 1fr;
+	grid-gap: 1em;
+	grid-template-areas: ". b ." ". n ." ". m .";
+}
+
+.box1 {
+	text-align: center;
+	background-color: rgba(255, 153, 0, 0.8);
+}
+
+.box1 h1 {
+	font-size: 3em;
+	color: #eee;
+}
+
+.box2 {
+	grid-area: n;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 3fr;
+	grid-template-rows: repeat(2, 1fr);
+	grid-template-areas: "k1 k2 k3 e" "m m m e";
+	text-align: center;
+	grid-gap: 2em;
+	margin-bottom: 500px;
+}
+
+.table-responsive,
+.table,
+.table-bordered {
+	grid-column: 1/5;
+	grid-row: 1;
+	width: 100%;
+}
+
+.table a {
+	text-decoration: none;
+	color: black;
+}
+
+tr:nth-child(even) {
+	background-color: #ccc;
+}
+table th,
+table td {
+	text-align: center;
+	border-bottom: #eee 1px solid;
+	font-size: 1.2em;
+	padding-top: 1%;
+}
+
+.k1 {
+	grid-area: k1;
+}
+
+.k1 > a > button,
+.k2 > a > button,
+.k3 > a > button,
+.k4 > a > button {
+	width: 90%;
+	height: 90%;
+	min-height: 100px;
+	min-width: 250px;
+	background-color: rgba(255, 153, 0, 0.8);
+	border: 1px rgba(255, 153, 0, 0.8) solid;
+	font-size: 2em;
+	color: #eee;
+	cursor: pointer;
+	box-shadow: 7px 7px rgba(75, 75, 75, 0.6);
+	font-family: 'AlianzaW03-Slab900';
+	text-transform: uppercase;
+}
+
+.k1 > a > button:hover,
+.k2 > a > button:hover,
+.k3 > a > button:hover,
+.k4 > a > button:hover {
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(196, 117, 0, 0.9);
+	border: 1px rgb(196, 117, 0, 0.9) solid;
+	box-shadow: 12px 12px rgba(75, 75, 75, 0.6);
+	font-size: 2em;
+	font-family: 'AlianzaW03-Slab900';
+	text-transform: uppercase;
+}
+
+.k2 {
+	grid-area: k2;
+}
+
+.k3 {
+	grid-area: k3;
+}
+
+.eventkalender {
+	grid-area: e;
+	color: #eee;
+}
+
+.box3 {
+	grid-area: m;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+.box3 > a > button {
+	width: 90%;
+	height: 40%;
+	margin-bottom: 15px;
+	background-color: rgba(255, 153, 0, 0.8);
+	border: 1px rgb(255, 153, 0, 0.8) solid;
+	color: #eee;
+	font-size: 2em;
+	text-decoration: none;
+	cursor: pointer;
+	box-shadow: 7px 7px rgba(75, 75, 75, 0.6);
+	font-family: 'AlianzaW03-Slab900';
+	text-transform: uppercase;
+}
+.box3 > a > button:hover {
+	width: 100%;
+	height: 50%;
+	background-color: rgba(196, 117, 0, 0.9);
+	border: 1px rgb(196, 117, 0, 0.9) solid;
+	color: #eee;
+	cursor: pointer;
+	box-shadow: 12px 12px rgba(75, 75, 75, 0.6);
+	font-family: 'AlianzaW03-Slab900';
+	text-transform: uppercase;
+}
+
+.box3 > button {
+	grid-row: 6/10;
+	grid-column: 1/7;
+	border-radius: 0%;
+	font-size: 3em;
+	background-color: rgba(158, 84, 0, 0.8);
+	color: #eee;
+}
+
+.bbtn {
+	width: 50%;
+	height: 50%;
+	border-radius: 0%;
+	font-size: 3em;
+	background-color: rgba(158, 84, 0, 0.8);
+	color: #eee;
+}
+
+.bbtn:hover {
+	width: 55%;
+	height: 55%;
+	background-color: rgba(158, 84, 0, 1);
+	color: #eee;
+}
+
+#fill {
+	position: absolute;
+	grid-row: 1/4;
+	grid-column: 1/4;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(133, 133, 133, 0.5);
+}
+
+#mover {
+	position: absolute;
+	right: -110%;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	-webkit-transition: 0.5s ease-in-out;
+	-moz-transition: 0.5s ease-in-out;
+	-o-transition: 0.5s ease-in-out;
+	transition: 0.5s ease-in-out;
+}
+
+.go-left {
+	-webkit-transform: translate(110%, 0);
+	-moz-transform: translate(110%, 0);
+	-o-transform: translate(110%, 0);
+	transform: translate(110%, 0);
+}
+
+.go-right {
+	-webkit-transform: translate(-110%, 0);
+	-moz-transform: translate(-110%, 0);
+	-o-transform: translate(-110%, 0);
+	transform: translate(-110%, 0);
+}
+
+#test {
+	grid-row: 5/8;
+	grid-column: 5/10;
+	-webkit-transition: 0.5s ease-in-out;
+	-moz-transition: 0.5s ease-in-out;
+	-o-transition: 0.5s ease-in-out;
+	transition: 0.5s ease-in-out;
+}
+
+#fill {
+	position: absolute;
+	left: 0%;
+	top: 0%;
+	width: 40%;
+	height: 100%;
+	background-color: rgba(133, 133, 133, 0.5);
+}
+
+#kurv {
+	position: absolute;
+	right: 0%;
+	top: 0%;
+	width: 60%;
+	height: 100%;
+	background-color: rgba(238, 238, 238, 0.9);
+}
+
+.fable {
+	grid-row: 1/6;
+	grid-column: 1/7;
+	border: 1px solid #eee;
+	display: table;
+	width: 100%;
+	height: 100%;
+	font-size: 1.5em;
+	font-weight: lighter;
+}
+
+.fr {
+	border: 1px solid #eee;
+	display: table-row;
+}
+.fd {
+	border: 1px solid #eee;
+	display: table-cell;
+	background-color: rgba(238, 238, 238, 0.8);
+}
+#fail {
+	grid-row: 1/6;
+	grid-column: 1/4;
+	text-align: center;
+	color: black;
+}
+
+.ledig {
+	background-color: rgb(147, 255, 147);
+	color: #000;
+	font-family: "AlianzaW03-Slab900";
+	text-transform: uppercase;
+}
+
+.brugt {
+	background-color: rgb(255, 147, 147);
+	color: #000;
+	font-family: "AlianzaW03-Slab900";
+	text-transform: uppercase;
+}
+/* Kilde: https://phppot.com/php/simple-php-shopping-cart/ */
+/*******************************Calendar Top Navigation*********************************/
+div#calendar {
+	margin: 0px auto;
+	padding: 0px;
+	width: 602px;
+	font-family: Helvetica, "Times New Roman", Times, serif;
+}
+
+div#calendar div.box {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 40px;
+	background-color: rgba(255, 153, 0, 0.8);
+}
+
+div#calendar div.header {
+	line-height: 40px;
+	vertical-align: middle;
+	font-family: "AlianzaW03-Slab900";
+	text-transform: uppercase;
+}
+
+div#calendar div.header a.prev,
+div#calendar div.header a.next {
+	top: 0px;
+	height: 17px;
+	display: block;
+	cursor: pointer;
+	text-decoration: none;
+	color: #fff;
+	width: 120px;
+	font-size: 0.8em;
+}
+
+div#calendar div.header a.prev {
+	grid-row: 1/3;
+	grid-column: 1/3;
+}
+
+div#calendar div.header a.next {
+	grid-row: 1/3;
+	grid-column: 4/6;
+}
+
+div#calendar div.header span.title {
+	grid-row: 1/3;
+	grid-column: 3;
+	color: #fff;
+	font-size: 18px;
+	display: block;
+	padding-left: 120px;
+	padding-right: 120px;
+	width: 100px;
+}
+
+span.title {
+	display: inline-block;
+}
+
+div#calendar div.header a.prev {
+	left: 0px;
+}
+
+div#calendar div.header a.next {
+	right: 0px;
+}
+
+/*******************************Calendar Content Cells*********************************/
+div#calendar div.box-content {
+	border-top: none;
+}
+
+div#calendar ul.label {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	margin-top: 5px;
+	margin-left: 5px;
+	background-color: rgba(238, 238, 238, 0.9);
+}
+
+div#calendar ul.label li {
+	margin: 0px;
+	padding: 0px;
+	margin-right: 5px;
+	float: left;
+	list-style-type: none;
+	width: 80px;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: middle;
+	text-align: center;
+	color: #000;
+	font-size: 15px;
+	background-color: transparent;
+	font-family: "AlianzaW03-Slab900";
+	text-transform: uppercase;
+}
+
+div#calendar ul.dates {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	font-family: "AlianzaW03-Slab900";
+	text-transform: uppercase;
+}
+
+/** overall width = width+padding-right**/
+
+#li2020-05-01,
+#li2020-05-02,
+#li2020-05-03,
+#li2020-05-04,
+#li2020-05-05,
+#li2020-05-06,
+#li2020-05-07,
+#li2020-05-08,
+#li2020-05-09,
+#li2020-05-10 {
+	background-color: rgb(255, 147, 147);
+}
+
+#li2020-05-01:hover,
+#li2020-05-02:hover,
+#li2020-05-03:hover,
+#li2020-05-04:hover,
+#li2020-05-05:hover,
+#li2020-05-06:hover,
+#li2020-05-07:hover,
+#li2020-05-08:hover,
+#li2020-05-09:hover,
+#li2020-05-10:hover {
+	background-color: rgb(250, 95, 95);
+}
+
+#li {
+	background-color: rgba(238, 238, 238, 0);
+}
+
+li[id^="li"][id$="1"],
+li[id^="li"][id$="2"],
+li[id^="li"][id$="3"],
+li[id^="li"][id$="4"],
+li[id^="li"][id$="5"],
+li[id^="li"][id$="6"],
+li[id^="li"][id$="7"],
+li[id^="li"][id$="8"],
+li[id^="li"][id$="9"],
+li[id^="li"][id$="0"] {
+	background-color: rgb(147, 255, 147);
+}
+
+li[id^="li"][id$="1"]:hover,
+li[id^="li"][id$="2"]:hover,
+li[id^="li"][id$="3"]:hover,
+li[id^="li"][id$="4"]:hover,
+li[id^="li"][id$="5"]:hover,
+li[id^="li"][id$="6"]:hover,
+li[id^="li"][id$="7"]:hover,
+li[id^="li"][id$="8"]:hover,
+li[id^="li"][id$="9"]:hover,
+li[id^="li"][id$="0"]:hover {
+	background-color: rgb(49, 247, 49);
+}
+
+div#calendar ul.dates a li {
+	margin: 0px;
+	padding: 0px;
+	margin-right: 5px;
+	margin-top: 5px;
+	line-height: 80px;
+	vertical-align: middle;
+	float: left;
+	list-style-type: none;
+	width: 80px;
+	height: 80px;
+	font-size: 25px;
+	color: #000;
+	text-align: center;
+	font-family: "AlianzaW03-Slab900";
+	text-transform: uppercase;
+}
+
+:focus {
+	outline: none;
+}
+
+div.clear {
+	clear: both;
+}
+
+div#calendar div.header a.prev:hover,
+div#calendar div.header a.next:hover {
+	color: rgb(158, 84, 0);
+	text-decoration: underline;
+}
+
+/* Media queries*/
+@media only screen and (max-width: 1470px) {
+	.header {
+		grid-template-areas: "l l t c c" "l l t c c";
+	}
+
+	.main {
+		grid-template-areas: "b b b" "n n n" "m m m";
+	}
+
+	.cart {
+		align-self: center;
+	}
+	.cart > a > img {
+		width: 13%;
+		opacity: 90%;
+	}
+
+	.logo {
+		text-align: start;
+		align-self: center;
+	}
+
+	.logo > a > img {
+		width: 60%;
+	}
+
+	.k1 > a > button,
+	.k2 > a > button,
+	.k3 > a > button,
+	.k4 > a > button {
+		width: 150px;
+		font-size: 2em;
+	}
+
+	.k1 > a > button:hover,
+	.k2 > a > button:hover,
+	.k3 > a > button:hover,
+	.k4 > a > button:hover {
+		width: 150px;
+		font-size: 2em;
+	}
+	div#calendar ul.dates a li {
+		margin-right: 2.5px;
+		margin-top: 2.5px;
+		line-height: 68px;
+		width: 68px;
+		height: 68px;
+		font-size: 12.5px;
+	}
+
+	div#calendar ul.label li {
+		margin-right: 2.5px;
+		width: 68px;
+		height: 30px;
+		line-height: 30px;
+		font-size: 8px;
+	}
+
+	div#calendar {
+		width: 500px;
+	}
+
+	div#calendar div.header {
+		line-height: 20px;
+	}
+
+	div#calendar div.header a.prev,
+	div#calendar div.header a.next {
+		height: 8px;
+		width: 40px;
+		font-size: 12px;
+	}
+
+	div#calendar div.header a.next {
+		grid-column: 5;
+	}
+
+	div#calendar div.header span.title {
+		font-size: 12px;
+		padding-left: 40px;
+		padding-right: 80px;
+	}
+
+	.logo a img {
+		width: 65%;
+		min-width: 150px;
+		max-width: 300px;
+	}
+
+	.cart > a > img {
+		width: 20%;
+		min-width: 50px;
+		max-width: 70px;
+	}
+
+	.k1 > a > button,
+	.k2 > a > button,
+	.k3 > a > button,
+	.k4 > a > button {
+		width: 90%;
+		height: 90%;
+		min-height: 100px;
+		min-width: 180px;
+		font-size: 1.2em;
+	}
+
+	.k1 > a > button:hover,
+	.k2 > a > button:hover,
+	.k3 > a > button:hover,
+	.k4 > a > button:hover {
+		width: 100%;
+		height: 100%;
+		font-size: 1.2em;
+	}
+	.box3 > a > button {
+		width: 97%;
+		height: 45%;
+		font-size: 1.2em;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.box3 > a > button:hover {
+		width: 100%;
+		height: 50%;
+	}
+}
+
+@media only screen and (max-width: 1160px) {
+	.box2 {
+		grid-template-columns: repeat(6, minmax(0.1px, 1fr));
+		grid-template-rows: repeat(3, 200px);
+		grid-gap: 1em;
+	}
+
+	.k1 {
+		grid-column: 1/3;
+		grid-row: 1;
+	}
+
+	.k2 {
+		grid-column: 3/5;
+		grid-row: 1;
+	}
+
+	.k3 {
+		grid-column: 5/7;
+		grid-row: 1;
+	}
+
+	.k1 > a > button,
+	.k2 > a > button,
+	.k3 > a > button,
+	.k4 > a > button {
+		height: 100%;
+		width: 100%;
+		font-size: 2em;
+	}
+
+	.k1 > a > button:hover,
+	.k2 > a > button:hover,
+	.k3 > a > button:hover,
+	.k4 > a > button:hover {
+		height: 101%;
+		width: 101%;
+		font-size: 2em;
+	}
+
+	.box3 {
+		grid-row: 2;
+		grid-column: 1/7;
+		display: grid;
+		grid-template-rows: 1fr;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1em;
+	}
+
+	.box3 > a > button {
+		height: 100%;
+		width: 100%;
+		font-size: 2em;
+	}
+
+	.box3a {
+		grid-row: 1;
+		grid-column: 1;
+	}
+
+	.box3b {
+		grid-row: 1;
+		grid-column: 2;
+	}
+
+	.box3 > a > button:hover {
+		height: 101%;
+		width: 101%;
+		font-size: 2em;
+	}
+	.eventkalender {
+		visibility: hidden;
+		grid-column: 2;
+		grid-row: 3;
+	}
+
+	.table-responsive,
+	.table,
+	.table-bordered {
+		grid-column: 1/7;
+		grid-row: 1;
+		font-size: 0.9em;
+	}
+	.bbtn {
+		font-size: 1.6em;
+	}
+}
+
+@media only screen and (max-width: 660px) {
+	.grid {
+		margin: 0px;
+	}
+
+	.header {
+		grid-area: unset;
+		grid-row: 1/3;
+		grid-column: 1/13;
+	}
+
+	.main {
+		grid-area: unset;
+		grid-row: 3/13;
+		grid-column: 1/13;
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(5, 1fr);
+		width: 100vw;
+		font-size: 0.8em;
+	}
+
+	.box2 {
+		grid-row: 1;
+		width: 100%;
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(5, 100px);
+	}
+
+	.k1 {
+		grid-row: 1;
+		grid-column: 1;
+	}
+
+	.k2 {
+		grid-row: 2;
+		grid-column: 1;
+	}
+
+	.k3 {
+		grid-row: 3;
+		grid-column: 1;
+	}
+
+	.box3 {
+		grid-row: 4/6;
+		grid-column: 1;
+	}
+
+	.eventkalender {
+		visibility: hidden;
+		grid-column: 1;
+		grid-row: 1;
+	}
+
+	div#calendar {
+		width: auto;
+	}
+
+	.cart > a > p {
+		font-size: 0.6em;
+	}
+}
+
+@media only screen and (max-width: 370px) {
+	.cart {
+		font-size: 0.9em;
+	}
+
+	.main {
+		font-size: 0.6em;
+	}
+}
