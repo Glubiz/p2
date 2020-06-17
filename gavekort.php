@@ -12,8 +12,9 @@ $dbName = "solskov_jensen_dk_db";
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
 
- 
+ //Kilde: https://phppot.com/php/simple-php-shopping-cart/
     if (isset($_POST["add"])){
+        if ($_POST["quantity"] != null || $_POST["quantity"] != 0){
         if (isset($_SESSION["cart"])){
             $item_array_id = array_column($_SESSION["cart"],"product_id");
             if (!in_array($_GET["id"],$item_array_id)){
@@ -53,6 +54,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             );
             $_SESSION["cart"][0] = $item_array;
         }
+    }
     }
  
     if (isset($_GET["action"])){
@@ -125,11 +127,35 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                            <input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>">
                          </div>
                          <div class="cont2">
-                           <p>Stk pris: <?php echo $row["product_price"]; ?> DKK</p>
-                           <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
+                         <?php
+                         if($row["product_name"] == "Gavekort til butik og spisesteder"){
+                            ?>
+                            <p>Valgfrit beløb</p>
+                            <?php
+                         } else {
+                             ?>
+                            <p>Stk pris: <?php echo $row["product_price"]; ?> DKK</p>
+                            <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
+                            <?php
+                         }
+                         ?>
                          </div>
                          <div class="cont3">
-                           <input type="number" name="quantity" placeholder="0" value="<?php if (isset($_SESSION["cart"])) {
+                         <?php
+                         if($row["product_name"] == "Gavekort til butik og spisesteder"){
+                            ?>
+                            <select name="hidden_price">
+                                <option value="100">100 DKK</option>
+                                <option value="200">200 DKK</option>
+                                <option value="300">300 DKK</option>
+                                <option value="400">400 DKK</option>
+                                <option value="500">500 DKK</option>
+                                </select>
+                            <input type="hidden" name="quantity" placeholder="0" value="1">
+                            <?php
+                         } else {
+                             ?>
+                            <input type="number" name="quantity" placeholder="0" value="<?php if (isset($_SESSION["cart"])) {
                              foreach ($_SESSION["cart"] as $key => $value) {
                                if ($value["item_name"] == $row["product_name"]) {
                                  echo $value["item_quantity"];
@@ -138,6 +164,10 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                            } else {
                              echo "";
                            } ?>" min="0">
+                            <?php
+                         }
+                         ?>
+                           
                          </div>
                          <div class="cont4">
                            <input id="trigger3" type="submit" name="add" style="margin-top: 5px;"

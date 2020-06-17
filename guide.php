@@ -5,7 +5,7 @@ header('Cache-control: private');
 header('Content-Type: text/html; charset=utf-8');
     require "includes/dbh.inc.php";
 
- 
+ //Kilde: https://phppot.com/php/simple-php-shopping-cart/
     if (isset($_POST["add"])){
         if (isset($_SESSION["cart"])){
             $item_array_id = array_column($_SESSION["cart"],"product_id");
@@ -118,8 +118,7 @@ header('Content-Type: text/html; charset=utf-8');
                    <input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>">
                  </div>
                  <div class="cont4">
-                   <a href="booking.php"><input id="trigger3" type="submit" name="add" style="margin-top: 5px;"
-                   value="Til booking"></a>
+                 <a href="<?php echo $row['product_name'] . '.php';?>"><input type="submit" value="Til booking"></a>
                  </div>
                  
                  </div>

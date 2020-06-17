@@ -1,13 +1,12 @@
 <?php
 session_cache_limiter(FALSE);
 session_start();
+header("Refresh: 5; url=index.php");
 header('Cache-control: private');
 header('Content-Type: text/html; charset=utf-8');
 
     require "includes/dbh.inc.php";
     include "header.php";
-
-    header("Refresh: 5; url=index.php");
 ?>
     <!-- grid div-->
     <div class="grid">

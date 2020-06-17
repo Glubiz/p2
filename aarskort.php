@@ -11,9 +11,9 @@ header('Cache-control: private');
         // Create connection
         $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
-
- 
+//Kilde: https://phppot.com/php/simple-php-shopping-cart/
     if (isset($_POST["add"])){
+        if ($_POST["quantity"] != null || $_POST["quantity"] != 0){
         if (isset($_SESSION["cart"])){
             $item_array_id = array_column($_SESSION["cart"],"product_id");
             if (!in_array($_GET["id"],$item_array_id)){
@@ -53,6 +53,7 @@ header('Cache-control: private');
                 'item_quantity' => $_POST["quantity"],
             );
             $_SESSION["cart"][0] = $item_array;
+        }
         }
     }
  
@@ -116,7 +117,7 @@ header('Cache-control: private');
                        <div class="container">
                      
                          <div class="cont1">
-                           <?php if ($row["product_name"] == "Dagsbillet studerende") {
+                           <?php if ($row["product_name"] == "Årskort studerende") {
                              echo '<p>' . $row["product_name"] . '</p> <p class="red">For at benytte billetten skal studiekort fremvises ved indgangen</p>';
                            } else {
                              echo '<p>' . $row["product_name"] . '</p>';

@@ -4,7 +4,14 @@ session_start();
 setlocale(LC_TIME, 'da-DK');
 header('Cache-control: private');
 include "includes/dbh.inc.php";
+/*
 
+
+Link til siden: https://solskov-jensen.dk/p2
+
+
+*/
+//Kilde: https://phppot.com/php/simple-php-shopping-cart/
     if (isset($_POST["add"])){
         if (isset($_SESSION["cart"])){
             $item_array_id = array_column($_SESSION["cart"],"product_id");
@@ -58,17 +65,13 @@ include "includes/dbh.inc.php";
             }
         }
     }
-
+//Kilde: https://www.startutorial.com/articles/view/how-to-build-a-web-calendar-in-php
     class Calendar {  
      
-        /**
-         * Constructor
-         */
         public function __construct(){     
             $this->naviHref = htmlentities($_SERVER['PHP_SELF']);
         }
          
-        /********************* PROPERTY ********************/  
         private $dayLabels = array("Mon","Tirs","Ons","Tors","Fre","Lør","Søn");
          
         private $currentYear=0;
@@ -83,11 +86,6 @@ include "includes/dbh.inc.php";
          
         private $naviHref= null;
          
-        /********************* PUBLIC **********************/  
-            
-        /**
-        * print out the calendar
-        */
         public function show() {
             $year  = null;
              
@@ -131,10 +129,8 @@ include "includes/dbh.inc.php";
                                     $content.='<ul class="dates">';    
                                      
                                     $weeksInMonth = $this->_weeksInMonth($month,$year);
-                                    // Create weeks in a month
                                     for( $i=0; $i<$weeksInMonth; $i++ ){
                                          
-                                        //Create days in a week
                                         for($j=1;$j<=7;$j++){
                                             $content.=$this->_showDay($i*7+$j);
                                         }
@@ -151,10 +147,6 @@ include "includes/dbh.inc.php";
             return $content;   
         }
          
-        /********************* PRIVATE **********************/ 
-        /**
-        * create the li element for ul
-        */
         private function _showDay($cellNumber){
             if($this->currentDay==0){
                  
@@ -187,9 +179,6 @@ include "includes/dbh.inc.php";
                     ($cellContent==null?'mask':'').'">'.$cellContent.'</li></a>';
         }
          
-        /**
-        * create navigation
-        */
         private function _createNavi(){
              
             $nextMonth = $this->currentMonth==12?1:intval($this->currentMonth)+1;
@@ -208,9 +197,6 @@ include "includes/dbh.inc.php";
                 '</div>';
         }
              
-        /**
-        * create calendar week labels
-        */
         private function _createLabels(){  
                      
             $content='';
@@ -226,9 +212,6 @@ include "includes/dbh.inc.php";
          
          
          
-        /**
-        * calculate number of weeks in a particular month
-        */
         private function _weeksInMonth($month=null,$year=null){
              
             if( null==($year) ) {
@@ -240,7 +223,6 @@ include "includes/dbh.inc.php";
                 $month = date("m",time());
             }
              
-            // find number of days in this month
             $daysInMonths = $this->_daysInMonth($month,$year);
              
             $numOfweeks = ($daysInMonths%7==0?0:1) + intval($daysInMonths/7);
@@ -258,9 +240,6 @@ include "includes/dbh.inc.php";
             return $numOfweeks;
         }
      
-        /**
-        * calculate number of days in a particular month
-        */
         private function _daysInMonth($month=null,$year=null){
              
             if(null==($year))
@@ -322,7 +301,7 @@ include "includes/dbh.inc.php";
 
             <div class="box3">
                 <a href="guide.php" class="box3a"><button>Guidede ture</button></a>
-                <a href="arrangementer.php" class="box3b"><button>Andre Arrangementer</button></a>
+                <a href="arrangementer.php" class="box3b"><button>Oplevelser</button></a>
             </div>
             </div>
         </div>

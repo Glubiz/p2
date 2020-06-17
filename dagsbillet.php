@@ -6,8 +6,9 @@ header('Content-Type: text/html; charset=utf-8');
 
     require "includes/dbh.inc.php";
 
- 
+ //Kilde: https://phppot.com/php/simple-php-shopping-cart/
     if (isset($_POST["add"])){
+      if ($_POST["quantity"] != null || $_POST["quantity"] != 0){
         if (isset($_SESSION["cart"])){
             $item_array_id = array_column($_SESSION["cart"],"product_id");
             if (!in_array($_GET["id"],$item_array_id)){
@@ -48,6 +49,7 @@ header('Content-Type: text/html; charset=utf-8');
             );
             $_SESSION["cart"][0] = $item_array;
         }
+      }
     }
  
     if (isset($_GET["action"])){

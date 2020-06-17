@@ -5,7 +5,7 @@ header('Cache-control: private');
 header('Content-Type: text/html; charset=utf-8');
     require "includes/dbh.inc.php";
 
- 
+ //Kilde: https://phppot.com/php/simple-php-shopping-cart/
     if (isset($_POST["add"])){
         if (isset($_SESSION["cart"])){
             $item_array_id = array_column($_SESSION["cart"],"product_id");
@@ -79,7 +79,7 @@ header('Content-Type: text/html; charset=utf-8');
         <!-- main div-->
         <div class="main">
             <!-- overskrift-->
-            <div class="box1"><h1>Andre arrangementer</h1></div>
+            <div class="box1"><h1>Oplevelser</h1></div>
             <!-- valg div-->
             <div class="box2">
 
